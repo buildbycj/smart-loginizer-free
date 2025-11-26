@@ -531,7 +531,7 @@ For support, feature requests, or bug reports:
 This plugin is licensed under the GPLv2 or later.
 
 ```
-Copyright (C) 2025 Smart Loginizer
+Copyright (C) 2025 Chiranjit Hazarika
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
