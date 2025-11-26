@@ -5,6 +5,7 @@ A comprehensive WordPress plugin that provides Elementor widgets for user authen
 ## 📋 Table of Contents
 
 - [Features](#features)
+- [Pro Version](#pro-version)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Configuration](#configuration)
@@ -18,11 +19,14 @@ A comprehensive WordPress plugin that provides Elementor widgets for user authen
 
 ## ✨ Features
 
-### 🎨 Elementor Widgets (7 Widgets)
+> This README describes the full capability of Smart Loginizer (free + Pro).  
+> Features marked **(Pro)** require the Smart Loginizer Pro add‑on. See the **Free vs Pro** section below for a summary.
 
-Smart Loginizer provides 7 powerful Elementor widgets for building custom authentication and account management interfaces:
+### 🎨 Elementor Widgets (Free + Pro)
 
-1. **Login Form Widget**
+Smart Loginizer provides powerful Elementor widgets for building custom authentication and account management interfaces:
+
+1. **Login Form Widget** *(Free)*
    - Username/Email and password fields
    - AJAX form submissions
    - Custom redirect after login
@@ -32,7 +36,7 @@ Smart Loginizer provides 7 powerful Elementor widgets for building custom authen
    - Button style customization
    - Responsive settings
 
-2. **Registration Form Widget**
+2. **Registration Form Widget** *(Free)*
    - Username, email, password, and confirm password fields
    - Password strength meter (zxcvbn.js)
    - Auto-login after registration option
@@ -42,7 +46,7 @@ Smart Loginizer provides 7 powerful Elementor widgets for building custom authen
    - Customizable form styling
    - Responsive design
 
-3. **Lost Password Widget**
+3. **Lost Password Widget** *(Free)*
    - Email input field
    - Password reset functionality
    - Customizable success messages
@@ -50,27 +54,27 @@ Smart Loginizer provides 7 powerful Elementor widgets for building custom authen
    - reCAPTCHA support
    - Styling controls
 
-4. **Logout Button Widget**
+4. **Logout Button Widget** *(Free)*
    - Custom redirect after logout
    - Customizable button text
    - Icon support
    - Full styling controls
    - Responsive settings
 
-5. **Go Home Button Widget**
+5. **Go Home Button Widget** *(Free)*
    - Navigate to home or custom URL
    - Customizable button text
    - Optional icon
    - Full styling controls
 
-6. **Auth Modal Widget**
+6. **Auth Modal Widget** *(Pro)*
    - Modal popup for authentication
    - Login and registration tabs
    - Customizable modal styling
    - Trigger button customization
    - Responsive modal design
 
-7. **Auth Form Widget (Inline)**
+7. **Auth Form Widget (Inline)** *(Pro)*
    - Inline authentication form
    - Login and registration support
    - Customizable layout
@@ -100,33 +104,33 @@ Support for multiple OAuth providers:
   - User profile data
   - Secure authentication
 
-### 🛡️ Security Features
+### 🛡️ Security Features (Free + Pro)
 
-- **reCAPTCHA Support**
+- **reCAPTCHA Support** *(Free)*
   - reCAPTCHA v2 (Checkbox)
   - reCAPTCHA v2 (Invisible)
   - reCAPTCHA v3
   - Configurable per form
 
-- **Password Protection**
+- **Password Protection** *(Free)*
   - Wrong password attempt limits
   - Account lockout after failed attempts
   - Configurable lockout duration
   - Password strength requirements
 
-- **Location-Based Restrictions**
+- **Location-Based Restrictions** *(Pro)*
   - IP geolocation support
   - Country-based login restrictions
   - Allow/block specific countries
   - IP whitelist/blacklist
 
-- **Registration Security**
+- **Registration Security** *(Pro)*
   - Registration limits per IP
   - Time-based rate limiting
   - Banned email domain filtering
   - Custom domain blacklist/whitelist
 
-- **General Security**
+- **General Security** *(Free core, enhanced in Pro)*
   - Nonce verification on all forms
   - Input sanitization and output escaping
   - SQL injection prevention
@@ -172,35 +176,21 @@ Support for multiple OAuth providers:
   - ARIA labels and roles
   - Focus management
 
-### 🛒 WooCommerce Integration
+### 🛒 WooCommerce Integration *(Pro)*
 
-- **My Account Support**
-  - Replace WooCommerce My Account page
-  - Custom endpoint display
-  - Navigation integration
-  - Content widget support
-
-- **Login Form Replacement**
+- **Login Form Replacement** *(Pro)*
   - Replace WooCommerce login form
   - Custom Elementor templates
   - Redirect options for logged-out users
   - Seamless integration
 
-- **Account Endpoints**
-  - Orders endpoint
-  - Downloads endpoint
-  - Addresses endpoint
-  - Account details endpoint
-  - Payment methods endpoint
-  - Custom endpoints support
-
 ### ⚙️ Additional Features
 
-- **Page Restrictions**
-  - Restrict pages to logged-in users
-  - Custom redirect for unauthorized access
-  - Elementor template restrictions
-  - Role-based access control
+- **Page Restrictions** *(Free core, advanced options Pro)*
+  - Restrict pages to logged-in users *(Free)*
+  - Custom redirect for unauthorized access *(Free)*
+  - Elementor template-based login pages and advanced templates *(Pro)*
+  - Advanced role- and widget-based access control *(Pro)*
 
 - **Admin Settings Panel**
   - Comprehensive settings page
@@ -225,6 +215,66 @@ Support for multiple OAuth providers:
   - Namespace-based architecture
   - Hooks and filters
   - Extensible widget system
+
+## 🆓 Free vs 💼 Pro
+
+### Free Version (This Plugin)
+
+- **Elementor Widgets**
+  - Login Form
+  - Registration Form
+  - Lost Password
+  - Logout Button
+  - Go Home Button
+- **Authentication Core**
+  - AJAX login, registration, and lost password
+  - Custom redirects after login/registration/logout
+  - Custom Login Page (replace `wp-login.php` with a selected page)
+- **reCAPTCHA**
+  - reCAPTCHA v3
+  - reCAPTCHA v2 (Checkbox)
+  - reCAPTCHA v2 (Invisible)
+- **Social Login (OAuth)**
+  - Google, X (Twitter), LinkedIn, Facebook
+- **Page Restriction**
+  - “Page Restriction” meta box on posts and pages
+  - Restrict to logged-in, logged-out, or specific roles
+  - Show message / redirect to page / redirect to custom URL
+- **Core Security**
+  - Nonce verification
+  - Input sanitization and output escaping
+  - Secure redirects
+- **General**
+  - Multilingual-ready
+  - Performance-optimized asset loading
+
+### Pro Version (Add-On Plugin)
+
+- **Extra Elementor Widgets**
+  - Auth Modal (popup login/register)
+  - Auth Form (Inline, extended options)
+- **WooCommerce Enhancements**
+  - Replace WooCommerce login with Elementor templates
+  - Advanced “Action for Logged-Out Users” (redirect or template replacement)
+- **Elementor Widget Restriction**
+  - Control widget visibility per login state / restriction rules
+- **Advanced Security**
+  - Location-based login restrictions (country/IP)
+  - Registration limits (rate limiting per IP)
+  - Banned email domains (blacklist/whitelist)
+- **IP Geolocation Integration**
+  - Provider selection and configuration
+- **Page Restriction Enhancements**
+  - Global Elementor login template for restricted content
+  - Deeper integration with Pro widgets
+
+Free always shows Pro options in the settings UI (marked as Pro), but only the Pro add-on unlocks saving and using those advanced features.
+
+## 💼 Pro Version
+
+If you need advanced features like Elementor widget restriction, WooCommerce login replacement, Auth Modal and Auth Form (Inline) widgets, IP geolocation, and extended security controls (location-based restrictions, registration limits, banned domains), you can upgrade to the Pro version.
+
+- **Get Smart Loginizer Pro**: [https://smart-loginizer.buildbycj.com/pro](https://smart-loginizer.buildbycj.com/pro)
 
 ## 📦 Requirements
 

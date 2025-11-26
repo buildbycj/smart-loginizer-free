@@ -12,8 +12,6 @@ use SmartLoginizer\Widgets\Registration_Form_Widget;
 use SmartLoginizer\Widgets\Lost_Password_Widget;
 use SmartLoginizer\Widgets\Logout_Button_Widget;
 use SmartLoginizer\Widgets\Go_Home_Button_Widget;
-use SmartLoginizer\Widgets\Auth_Modal_Widget;
-use SmartLoginizer\Widgets\Auth_Form_Widget;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -117,9 +115,18 @@ class Widgets_Manager {
 			'lost_password'         => Lost_Password_Widget::class,
 			'logout_button'         => Logout_Button_Widget::class,
 			'go_home_button'        => Go_Home_Button_Widget::class,
-			'auth_modal'            => Auth_Modal_Widget::class,
-			'auth_form'             => Auth_Form_Widget::class,
 		);
+
+		// Pro widgets.
+		if ( \SmartLoginizer\Helpers\Pro_Helper::is_pro_active() ) {
+			// Check if pro widgets are available.
+			if ( class_exists( 'SmartLoginizerPro\Widgets\Auth_Modal_Widget' ) ) {
+				$widgets['auth_modal'] = 'SmartLoginizerPro\Widgets\Auth_Modal_Widget';
+			}
+			if ( class_exists( 'SmartLoginizerPro\Widgets\Auth_Form_Widget' ) ) {
+				$widgets['auth_form'] = 'SmartLoginizerPro\Widgets\Auth_Form_Widget';
+			}
+		}
 
 		foreach ( $widgets as $widget_key => $widget_class ) {
 			$field_key = 'enable_widget_' . $widget_key;
@@ -127,7 +134,12 @@ class Widgets_Manager {
 			$enabled = isset( $options[ $field_key ] ) ? $options[ $field_key ] : 'yes';
 
 			if ( 'yes' === $enabled ) {
-				$widgets_manager->register( new $widget_class() );
+				// Handle string class names (for pro widgets).
+				if ( is_string( $widget_class ) && class_exists( $widget_class ) ) {
+					$widgets_manager->register( new $widget_class() );
+				} elseif ( class_exists( $widget_class ) ) {
+					$widgets_manager->register( new $widget_class() );
+				}
 			}
 		}
 	}

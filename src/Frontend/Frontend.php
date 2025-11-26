@@ -37,9 +37,9 @@ class Frontend {
 	/**
 	 * OAuth instance.
 	 *
-	 * @var OAuth
+	 * @var OAuth|null
 	 */
-	public OAuth $oauth;
+	public ?OAuth $oauth = null;
 
 	/**
 	 * Initialize frontend.
@@ -49,7 +49,15 @@ class Frontend {
 	public function __construct() {
 		$this->helpers = new Helpers();
 		$this->security = new Security();
-		$this->oauth   = new OAuth();
+		
+		// Load OAuth - check if pro version has it first, otherwise use free version.
+		if ( class_exists( 'SmartLoginizerPro\Frontend\OAuth' ) && function_exists( 'smart_loginizer_pro' ) && isset( smart_loginizer_pro()->core->oauth ) ) {
+			// Use pro version OAuth if available.
+			$this->oauth = smart_loginizer_pro()->core->oauth;
+		} else {
+			// Use free version OAuth.
+			$this->oauth = new OAuth();
+		}
 
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_action( 'wp_ajax_smart_loginizer_login', array( $this, 'handle_ajax_login' ) );
@@ -64,8 +72,8 @@ class Frontend {
 		// Handle login template display for page restrictions.
 		add_action( 'template_redirect', array( $this, 'handle_login_template_display' ), 5 );
 
-		// WooCommerce login replacement.
-		if ( class_exists( 'WooCommerce' ) ) {
+		// WooCommerce login replacement (Pro feature).
+		if ( class_exists( 'WooCommerce' ) && \SmartLoginizer\Helpers\Pro_Helper::is_pro_feature_available( 'woocommerce' ) ) {
 			// Remove default WooCommerce account content and replace with custom content.
 			add_action( 'template_redirect', array( $this, 'init_woocommerce_replacement' ), 5 );
 			// Filter the template to replace login form.
@@ -169,15 +177,20 @@ class Frontend {
 		$enable_password_limit = 'yes' === ( $global_settings['enable_password_limit'] ?? 'no' );
 		$wrong_password_limit = isset( $global_settings['wrong_password_limit'] ) ? absint( $global_settings['wrong_password_limit'] ) : 5;
 		$password_lockout_duration = isset( $global_settings['password_lockout_duration'] ) ? absint( $global_settings['password_lockout_duration'] ) : 15;
-		$enable_location_restriction = 'yes' === ( $global_settings['enable_location_restriction'] ?? 'no' );
+		
+		// Location restriction is a Pro feature.
+		$enable_location_restriction = false;
+		if ( \SmartLoginizer\Helpers\Pro_Helper::is_pro_feature_available( 'location_restriction' ) ) {
+			$enable_location_restriction = 'yes' === ( $global_settings['enable_location_restriction'] ?? 'no' );
+		}
 		$location_restriction_type = $global_settings['location_restriction_type'] ?? 'blocked';
 		$location_countries = $global_settings['location_countries'] ?? '';
 
 		// Get client IP.
 		$client_ip = $this->security->get_client_ip();
 
-		// Check location restriction.
-		if ( $enable_location_restriction ) {
+		// Check location restriction (Pro feature).
+		if ( $enable_location_restriction && \SmartLoginizer\Helpers\Pro_Helper::is_pro_feature_available( 'location_restriction' ) ) {
 			$location_check = $this->security->check_location_restriction( $client_ip, $location_restriction_type, $location_countries );
 			if ( $location_check['blocked'] ) {
 				wp_send_json_error( array( 'message' => wp_kses_post( $location_check['message'] ) ) );
@@ -254,12 +267,27 @@ class Frontend {
 
 		// Get global security settings.
 		$global_settings = get_option( 'smart_loginizer_settings', array() );
-		$enable_registration_limit = 'yes' === ( $global_settings['enable_registration_limit'] ?? 'no' );
+		
+		// Registration limit is a Pro feature.
+		$enable_registration_limit = false;
+		if ( \SmartLoginizer\Helpers\Pro_Helper::is_pro_feature_available( 'registration_limit' ) ) {
+			$enable_registration_limit = 'yes' === ( $global_settings['enable_registration_limit'] ?? 'no' );
+		}
 		$max_registrations_per_ip = isset( $global_settings['max_registrations_per_ip'] ) ? absint( $global_settings['max_registrations_per_ip'] ) : 3;
 		$registration_limit_period = isset( $global_settings['registration_limit_period'] ) ? absint( $global_settings['registration_limit_period'] ) : 24;
-		$enable_banned_domains = 'yes' === ( $global_settings['enable_banned_domains'] ?? 'no' );
+		
+		// Banned domains is a Pro feature.
+		$enable_banned_domains = false;
+		if ( \SmartLoginizer\Helpers\Pro_Helper::is_pro_feature_available( 'banned_domains' ) ) {
+			$enable_banned_domains = 'yes' === ( $global_settings['enable_banned_domains'] ?? 'no' );
+		}
 		$banned_email_domains = $global_settings['banned_email_domains'] ?? '';
-		$enable_location_restriction = 'yes' === ( $global_settings['enable_location_restriction'] ?? 'no' );
+		
+		// Location restriction is a Pro feature.
+		$enable_location_restriction = false;
+		if ( \SmartLoginizer\Helpers\Pro_Helper::is_pro_feature_available( 'location_restriction' ) ) {
+			$enable_location_restriction = 'yes' === ( $global_settings['enable_location_restriction'] ?? 'no' );
+		}
 		$location_restriction_type = $global_settings['location_restriction_type'] ?? 'blocked';
 		$location_countries = $global_settings['location_countries'] ?? '';
 
@@ -361,15 +389,20 @@ class Frontend {
 
 		// Get global security settings.
 		$global_settings = get_option( 'smart_loginizer_settings', array() );
-		$enable_location_restriction = 'yes' === ( $global_settings['enable_location_restriction'] ?? 'no' );
+		
+		// Location restriction is a Pro feature.
+		$enable_location_restriction = false;
+		if ( \SmartLoginizer\Helpers\Pro_Helper::is_pro_feature_available( 'location_restriction' ) ) {
+			$enable_location_restriction = 'yes' === ( $global_settings['enable_location_restriction'] ?? 'no' );
+		}
 		$location_restriction_type = $global_settings['location_restriction_type'] ?? 'blocked';
 		$location_countries = $global_settings['location_countries'] ?? '';
 
 		// Get client IP.
 		$client_ip = $this->security->get_client_ip();
 
-		// Check location restriction.
-		if ( $enable_location_restriction ) {
+		// Check location restriction (Pro feature).
+		if ( $enable_location_restriction && \SmartLoginizer\Helpers\Pro_Helper::is_pro_feature_available( 'location_restriction' ) ) {
 			$location_check = $this->security->check_location_restriction( $client_ip, $location_restriction_type, $location_countries );
 			if ( $location_check['blocked'] ) {
 				wp_send_json_error( array( 'message' => wp_kses_post( $location_check['message'] ) ) );
@@ -677,6 +710,11 @@ class Frontend {
 	 * @return void
 	 */
 	public function handle_login_template_display(): void {
+		// Page restriction is a Pro feature.
+		if ( ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_feature_available( 'page_restriction' ) ) {
+			return;
+		}
+
 		// Check if this is a login redirect from page restriction.
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Checking query parameter only.
 		if ( ! isset( $_GET['smart_loginizer_login'] ) || '1' !== $_GET['smart_loginizer_login'] ) {

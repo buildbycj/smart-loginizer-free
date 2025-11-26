@@ -144,7 +144,7 @@ class Admin {
 			)
 		);
 
-		// Custom Login Page settings.
+		// Custom Login Page settings (Free feature).
 		add_settings_field(
 			'enable_custom_login_page',
 			__( 'Enable Custom Login Page', 'smart-loginizer' ),
@@ -161,7 +161,7 @@ class Admin {
 			'smart-loginizer'
 		);
 
-		// WooCommerce Settings Section.
+		// WooCommerce Settings Section (Pro feature - always show).
 		add_settings_section(
 			'smart_loginizer_woocommerce',
 			__( 'WooCommerce Settings', 'smart-loginizer' ),
@@ -169,12 +169,17 @@ class Admin {
 			'smart-loginizer'
 		);
 
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
+		
 		add_settings_field(
 			'woocommerce_logged_out_action',
 			__( 'Action for Logged-Out Users', 'smart-loginizer' ),
 			array( $this, 'render_woocommerce_logged_out_action_field' ),
 			'smart-loginizer',
-			'smart_loginizer_woocommerce'
+			'smart_loginizer_woocommerce',
+			array(
+				'readonly'  => ! $is_pro,
+			)
 		);
 
 		add_settings_field(
@@ -182,7 +187,10 @@ class Admin {
 			__( 'Elementor Template (for Template Replacement)', 'smart-loginizer' ),
 			array( $this, 'render_woocommerce_login_replacement_field' ),
 			'smart-loginizer',
-			'smart_loginizer_woocommerce'
+			'smart_loginizer_woocommerce',
+			array(
+				'readonly'  => ! $is_pro,
+			)
 		);
 
 		add_settings_field(
@@ -190,10 +198,13 @@ class Admin {
 			__( 'Redirect Page', 'smart-loginizer' ),
 			array( $this, 'render_woocommerce_redirect_page_field' ),
 			'smart-loginizer',
-			'smart_loginizer_woocommerce'
+			'smart_loginizer_woocommerce',
+			array(
+				'readonly'  => ! $is_pro,
+			)
 		);
 
-		// IP Geolocation Section.
+		// IP Geolocation Section (Pro feature - always show).
 		add_settings_section(
 			'smart_loginizer_geolocation',
 			__( 'IP Geolocation Settings', 'smart-loginizer' ),
@@ -206,7 +217,10 @@ class Admin {
 			__( 'IP Geolocation Service', 'smart-loginizer' ),
 			array( $this, 'render_ip_geolocation_field' ),
 			'smart-loginizer',
-			'smart_loginizer_geolocation'
+			'smart_loginizer_geolocation',
+			array(
+				'readonly'  => ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active(),
+			)
 		);
 
 		add_settings_field(
@@ -219,10 +233,11 @@ class Admin {
 				'label_for' => 'ip_geolocation_api_key',
 				'type'      => 'text',
 				'description' => __( 'Optional: Only required for premium services. Leave empty to use free ip-api.com service.', 'smart-loginizer' ),
+				'readonly'  => ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active(),
 			)
 		);
 
-		// Page Restriction Section.
+		// Page Restriction Section (Pro feature - always show).
 		add_settings_section(
 			'smart_loginizer_page_restriction',
 			__( 'Page Restriction Settings', 'smart-loginizer' ),
@@ -235,10 +250,13 @@ class Admin {
 			__( 'Login Page Template', 'smart-loginizer' ),
 			array( $this, 'render_page_restriction_login_template_field' ),
 			'smart-loginizer',
-			'smart_loginizer_page_restriction'
+			'smart_loginizer_page_restriction',
+			array(
+				'readonly'  => ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active(),
+			)
 		);
 
-		// Elementor Widget Restriction Section.
+		// Elementor Widget Restriction Section (Pro feature - always show).
 		add_settings_section(
 			'smart_loginizer_elementor_widget_restriction',
 			__( 'Elementor Widget Restriction Settings', 'smart-loginizer' ),
@@ -251,10 +269,13 @@ class Admin {
 			__( 'Login Template for Widget Restrictions', 'smart-loginizer' ),
 			array( $this, 'render_elementor_widget_restriction_login_template_field' ),
 			'smart-loginizer',
-			'smart_loginizer_elementor_widget_restriction'
+			'smart_loginizer_elementor_widget_restriction',
+			array(
+				'readonly'  => ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active(),
+			)
 		);
 
-		// Social Login Section - Google.
+		// Social Login Section - Google (Free feature).
 		add_settings_section(
 			'smart_loginizer_google',
 			__( 'Google OAuth Settings', 'smart-loginizer' ),
@@ -262,6 +283,7 @@ class Admin {
 			'smart-loginizer'
 		);
 
+		// Social Login fields (Free feature).
 		add_settings_field(
 			'google_client_id',
 			__( 'Google Client ID', 'smart-loginizer' ),
@@ -431,7 +453,7 @@ class Admin {
 			)
 		);
 
-		// Security Settings Section - Location-Based Restriction.
+		// Security Settings Section - Location-Based Restriction (Pro feature - always show).
 		add_settings_section(
 			'smart_loginizer_security_location',
 			__( 'Location-Based Restriction', 'smart-loginizer' ),
@@ -439,6 +461,8 @@ class Admin {
 			'smart-loginizer'
 		);
 
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
+		
 		add_settings_field(
 			'enable_location_restriction',
 			__( 'Enable Location-Based Restriction', 'smart-loginizer' ),
@@ -447,6 +471,7 @@ class Admin {
 			'smart_loginizer_security_location',
 			array(
 				'label_for' => 'enable_location_restriction',
+				'readonly'  => ! $is_pro,
 			)
 		);
 
@@ -455,7 +480,10 @@ class Admin {
 			__( 'Restriction Type', 'smart-loginizer' ),
 			array( $this, 'render_location_restriction_type_field' ),
 			'smart-loginizer',
-			'smart_loginizer_security_location'
+			'smart_loginizer_security_location',
+			array(
+				'readonly'  => ! $is_pro,
+			)
 		);
 
 		add_settings_field(
@@ -468,10 +496,11 @@ class Admin {
 				'label_for' => 'location_countries',
 				'type'      => 'textarea',
 				'description' => __( 'Enter country ISO codes (e.g., US,GB,IN) separated by commas. Leave empty to disable.', 'smart-loginizer' ),
+				'readonly'  => ! $is_pro,
 			)
 		);
 
-		// Security Settings Section - Registration Limit.
+		// Security Settings Section - Registration Limit (Pro feature - always show).
 		add_settings_section(
 			'smart_loginizer_security_registration',
 			__( 'Registration Limit', 'smart-loginizer' ),
@@ -487,6 +516,7 @@ class Admin {
 			'smart_loginizer_security_registration',
 			array(
 				'label_for' => 'enable_registration_limit',
+				'readonly'  => ! $is_pro,
 			)
 		);
 
@@ -502,6 +532,7 @@ class Admin {
 				'min'       => 1,
 				'max'       => 100,
 				'default'   => 3,
+				'readonly'  => ! $is_pro,
 			)
 		);
 
@@ -517,10 +548,11 @@ class Admin {
 				'min'       => 1,
 				'max'       => 168,
 				'default'   => 24,
+				'readonly'  => ! $is_pro,
 			)
 		);
 
-		// Security Settings Section - Banned Email Domains.
+		// Security Settings Section - Banned Email Domains (Pro feature - always show).
 		add_settings_section(
 			'smart_loginizer_security_banned_domains',
 			__( 'Banned Email Domains', 'smart-loginizer' ),
@@ -536,6 +568,7 @@ class Admin {
 			'smart_loginizer_security_banned_domains',
 			array(
 				'label_for' => 'enable_banned_domains',
+				'readonly'  => ! $is_pro,
 			)
 		);
 
@@ -549,6 +582,7 @@ class Admin {
 				'label_for' => 'banned_email_domains',
 				'type'      => 'textarea',
 				'description' => __( 'Enter email domains to ban (e.g., example.com, spam.com). One domain per line or comma-separated.', 'smart-loginizer' ),
+				'readonly'  => ! $is_pro,
 			)
 		);
 	}
@@ -563,12 +597,14 @@ class Admin {
 		// Get existing settings to preserve values not in input.
 		$existing = get_option( 'smart_loginizer_settings', array() );
 		$sanitized = $existing; // Start with existing settings.
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
 
 		if ( isset( $input['enable_recaptcha'] ) ) {
 			$sanitized['enable_recaptcha'] = 'yes' === $input['enable_recaptcha'] ? 'yes' : 'no';
 		}
 
 		if ( isset( $input['recaptcha_version'] ) ) {
+			// All reCAPTCHA versions are available in free version.
 			$allowed_versions = array( 'v3', 'v2_checkbox', 'v2_invisible' );
 			$sanitized['recaptcha_version'] = in_array( $input['recaptcha_version'], $allowed_versions, true ) ? $input['recaptcha_version'] : 'v3';
 		}
@@ -581,6 +617,7 @@ class Admin {
 			$sanitized['recaptcha_secret_key'] = sanitize_text_field( $input['recaptcha_secret_key'] );
 		}
 
+		// OAuth settings (Free feature).
 		if ( isset( $input['google_client_id'] ) ) {
 			$sanitized['google_client_id'] = sanitize_text_field( $input['google_client_id'] );
 		}
@@ -622,14 +659,18 @@ class Admin {
 			$sanitized['facebook_app_secret'] = sanitize_text_field( $input['facebook_app_secret'] );
 		}
 
-		if ( isset( $input['ip_geolocation_service'] ) ) {
-			$sanitized['ip_geolocation_service'] = sanitize_text_field( $input['ip_geolocation_service'] );
+		// IP Geolocation (Pro feature) - only save if pro is active.
+		if ( $is_pro ) {
+			if ( isset( $input['ip_geolocation_service'] ) ) {
+				$sanitized['ip_geolocation_service'] = sanitize_text_field( $input['ip_geolocation_service'] );
+			}
+
+			if ( isset( $input['ip_geolocation_api_key'] ) ) {
+				$sanitized['ip_geolocation_api_key'] = sanitize_text_field( $input['ip_geolocation_api_key'] );
+			}
 		}
 
-		if ( isset( $input['ip_geolocation_api_key'] ) ) {
-			$sanitized['ip_geolocation_api_key'] = sanitize_text_field( $input['ip_geolocation_api_key'] );
-		}
-
+		// Custom Login Page (Free feature).
 		if ( isset( $input['enable_custom_login_page'] ) ) {
 			$sanitized['enable_custom_login_page'] = sanitize_text_field( $input['enable_custom_login_page'] );
 		}
@@ -638,17 +679,19 @@ class Admin {
 			$sanitized['custom_login_page_id'] = absint( $input['custom_login_page_id'] );
 		}
 
+		// WooCommerce settings (Pro feature) - only save if pro is active.
+		if ( $is_pro ) {
+			if ( isset( $input['woocommerce_logged_out_action'] ) ) {
+				$sanitized['woocommerce_logged_out_action'] = sanitize_text_field( $input['woocommerce_logged_out_action'] );
+			}
 
-		if ( isset( $input['woocommerce_logged_out_action'] ) ) {
-			$sanitized['woocommerce_logged_out_action'] = sanitize_text_field( $input['woocommerce_logged_out_action'] );
-		}
+			if ( isset( $input['woocommerce_login_replacement_template_id'] ) ) {
+				$sanitized['woocommerce_login_replacement_template_id'] = absint( $input['woocommerce_login_replacement_template_id'] );
+			}
 
-		if ( isset( $input['woocommerce_login_replacement_template_id'] ) ) {
-			$sanitized['woocommerce_login_replacement_template_id'] = absint( $input['woocommerce_login_replacement_template_id'] );
-		}
-
-		if ( isset( $input['woocommerce_logged_out_redirect_page_id'] ) ) {
-			$sanitized['woocommerce_logged_out_redirect_page_id'] = absint( $input['woocommerce_logged_out_redirect_page_id'] );
+			if ( isset( $input['woocommerce_logged_out_redirect_page_id'] ) ) {
+				$sanitized['woocommerce_logged_out_redirect_page_id'] = absint( $input['woocommerce_logged_out_redirect_page_id'] );
+			}
 		}
 
 		// Security settings - Wrong Password Limit.
@@ -676,54 +719,60 @@ class Admin {
 			}
 		}
 
-		// Security settings - Location-Based Restriction.
-		if ( isset( $input['enable_location_restriction'] ) ) {
-			$sanitized['enable_location_restriction'] = 'yes' === $input['enable_location_restriction'] ? 'yes' : 'no';
-		}
-
-		if ( isset( $input['location_restriction_type'] ) ) {
-			$sanitized['location_restriction_type'] = in_array( $input['location_restriction_type'], array( 'blocked', 'allowed' ), true ) ? $input['location_restriction_type'] : 'blocked';
-		}
-
-		if ( isset( $input['location_countries'] ) ) {
-			$sanitized['location_countries'] = sanitize_textarea_field( $input['location_countries'] );
-		}
-
-		// Security settings - Registration Limit.
-		if ( isset( $input['enable_registration_limit'] ) ) {
-			$sanitized['enable_registration_limit'] = 'yes' === $input['enable_registration_limit'] ? 'yes' : 'no';
-		}
-
-		if ( isset( $input['max_registrations_per_ip'] ) ) {
-			$sanitized['max_registrations_per_ip'] = absint( $input['max_registrations_per_ip'] );
-			if ( $sanitized['max_registrations_per_ip'] < 1 ) {
-				$sanitized['max_registrations_per_ip'] = 3;
+		// Security settings - Location-Based Restriction (Pro feature) - only save if pro is active.
+		if ( $is_pro ) {
+			if ( isset( $input['enable_location_restriction'] ) ) {
+				$sanitized['enable_location_restriction'] = 'yes' === $input['enable_location_restriction'] ? 'yes' : 'no';
 			}
-			if ( $sanitized['max_registrations_per_ip'] > 100 ) {
-				$sanitized['max_registrations_per_ip'] = 100;
+
+			if ( isset( $input['location_restriction_type'] ) ) {
+				$sanitized['location_restriction_type'] = in_array( $input['location_restriction_type'], array( 'blocked', 'allowed' ), true ) ? $input['location_restriction_type'] : 'blocked';
+			}
+
+			if ( isset( $input['location_countries'] ) ) {
+				$sanitized['location_countries'] = sanitize_textarea_field( $input['location_countries'] );
 			}
 		}
 
-		if ( isset( $input['registration_limit_period'] ) ) {
-			$sanitized['registration_limit_period'] = absint( $input['registration_limit_period'] );
-			if ( $sanitized['registration_limit_period'] < 1 ) {
-				$sanitized['registration_limit_period'] = 24;
+		// Security settings - Registration Limit (Pro feature) - only save if pro is active.
+		if ( $is_pro ) {
+			if ( isset( $input['enable_registration_limit'] ) ) {
+				$sanitized['enable_registration_limit'] = 'yes' === $input['enable_registration_limit'] ? 'yes' : 'no';
 			}
-			if ( $sanitized['registration_limit_period'] > 168 ) {
-				$sanitized['registration_limit_period'] = 168;
+
+			if ( isset( $input['max_registrations_per_ip'] ) ) {
+				$sanitized['max_registrations_per_ip'] = absint( $input['max_registrations_per_ip'] );
+				if ( $sanitized['max_registrations_per_ip'] < 1 ) {
+					$sanitized['max_registrations_per_ip'] = 3;
+				}
+				if ( $sanitized['max_registrations_per_ip'] > 100 ) {
+					$sanitized['max_registrations_per_ip'] = 100;
+				}
+			}
+
+			if ( isset( $input['registration_limit_period'] ) ) {
+				$sanitized['registration_limit_period'] = absint( $input['registration_limit_period'] );
+				if ( $sanitized['registration_limit_period'] < 1 ) {
+					$sanitized['registration_limit_period'] = 24;
+				}
+				if ( $sanitized['registration_limit_period'] > 168 ) {
+					$sanitized['registration_limit_period'] = 168;
+				}
 			}
 		}
 
-		// Security settings - Banned Email Domains.
-		if ( isset( $input['enable_banned_domains'] ) ) {
-			$sanitized['enable_banned_domains'] = 'yes' === $input['enable_banned_domains'] ? 'yes' : 'no';
+		// Security settings - Banned Email Domains (Pro feature) - only save if pro is active.
+		if ( $is_pro ) {
+			if ( isset( $input['enable_banned_domains'] ) ) {
+				$sanitized['enable_banned_domains'] = 'yes' === $input['enable_banned_domains'] ? 'yes' : 'no';
+			}
+
+			if ( isset( $input['banned_email_domains'] ) ) {
+				$sanitized['banned_email_domains'] = sanitize_textarea_field( $input['banned_email_domains'] );
+			}
 		}
 
-		if ( isset( $input['banned_email_domains'] ) ) {
-			$sanitized['banned_email_domains'] = sanitize_textarea_field( $input['banned_email_domains'] );
-		}
-
-		// Widget settings.
+		// Widget settings - always include pro widgets for read-only view.
 		$widgets = array(
 			'login_form',
 			'registration_form',
@@ -738,8 +787,17 @@ class Admin {
 		// With hidden inputs, all widget keys will be in input.
 		// When checkbox is checked: both hidden ('no') and checkbox ('yes') are sent, WordPress uses last value ('yes').
 		// When checkbox is unchecked: only hidden input ('no') is sent.
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
+		$pro_widgets = array( 'auth_modal', 'auth_form' );
+		
 		foreach ( $widgets as $widget_key ) {
 			$key = 'enable_widget_' . $widget_key;
+			
+			// Don't save pro widget settings if pro is not active.
+			if ( in_array( $widget_key, $pro_widgets, true ) && ! $is_pro ) {
+				continue;
+			}
+			
 			if ( isset( $input[ $key ] ) ) {
 				// WordPress may convert multiple values to array, or use last value.
 				$value = $input[ $key ];
@@ -754,14 +812,16 @@ class Admin {
 			// If key not in input at all, preserve existing value (already in $sanitized from $existing).
 		}
 
-		// Page Restriction settings.
-		if ( isset( $input['page_restriction_login_template_id'] ) ) {
-			$sanitized['page_restriction_login_template_id'] = absint( $input['page_restriction_login_template_id'] );
-		}
+		// Page Restriction settings (Pro feature) - only save if pro is active.
+		if ( $is_pro ) {
+			if ( isset( $input['page_restriction_login_template_id'] ) ) {
+				$sanitized['page_restriction_login_template_id'] = absint( $input['page_restriction_login_template_id'] );
+			}
 
-		// Elementor Widget Restriction settings.
-		if ( isset( $input['elementor_widget_restriction_login_template_id'] ) ) {
-			$sanitized['elementor_widget_restriction_login_template_id'] = absint( $input['elementor_widget_restriction_login_template_id'] );
+			// Elementor Widget Restriction settings.
+			if ( isset( $input['elementor_widget_restriction_login_template_id'] ) ) {
+				$sanitized['elementor_widget_restriction_login_template_id'] = absint( $input['elementor_widget_restriction_login_template_id'] );
+			}
 		}
 
 		return $sanitized;
@@ -896,18 +956,42 @@ class Admin {
 						$this->render_tab_sections( array( 'smart_loginizer_general', 'smart_loginizer_widgets' ) );
 						submit_button();
 					} elseif ( 'security' === $active_tab ) {
+						if ( ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active() ) {
+							echo '<div class="smart-loginizer-pro-features-notice">';
+							echo '<p class="description">' . esc_html__( 'Advanced security features are available in Smart Loginizer Pro. Configure your settings below (read-only in free version).', 'smart-loginizer' ) . '</p>';
+							echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( __( 'Location-Based Restriction, Registration Limits, and Banned Email Domains', 'smart-loginizer' ) ) );
+							echo '</div>';
+						}
 						$this->render_tab_sections( array( 'smart_loginizer_security_password_limit', 'smart_loginizer_security_location', 'smart_loginizer_security_registration', 'smart_loginizer_security_banned_domains' ) );
 						submit_button();
 					} elseif ( 'geolocation' === $active_tab ) {
+						if ( ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active() ) {
+							echo '<div class="smart-loginizer-pro-features-notice">';
+							echo '<p class="description">' . esc_html__( 'IP Geolocation features are available in Smart Loginizer Pro. Configure your settings below (read-only in free version).', 'smart-loginizer' ) . '</p>';
+							echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( __( 'IP Geolocation', 'smart-loginizer' ) ) );
+							echo '</div>';
+						}
 						$this->render_tab_sections( array( 'smart_loginizer_geolocation' ) );
 						submit_button();
 					} elseif ( 'social' === $active_tab ) {
 						$this->render_tab_sections( array( 'smart_loginizer_google', 'smart_loginizer_x', 'smart_loginizer_linkedin', 'smart_loginizer_facebook' ) );
 						submit_button();
 					} elseif ( 'woocommerce' === $active_tab ) {
+						if ( ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active() ) {
+							echo '<div class="smart-loginizer-pro-features-notice">';
+							echo '<p class="description">' . esc_html__( 'WooCommerce integration features are available in Smart Loginizer Pro. Configure your settings below (read-only in free version).', 'smart-loginizer' ) . '</p>';
+							echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( __( 'WooCommerce Integration', 'smart-loginizer' ) ) );
+							echo '</div>';
+						}
 						$this->render_tab_sections( array( 'smart_loginizer_woocommerce' ) );
 						submit_button();
 					} elseif ( 'page_restriction' === $active_tab ) {
+						if ( ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active() ) {
+							echo '<div class="smart-loginizer-pro-features-notice">';
+							echo '<p class="description">' . esc_html__( 'Page restriction features are available in Smart Loginizer Pro. Configure your settings below (read-only in free version).', 'smart-loginizer' ) . '</p>';
+							echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( __( 'Page Restrictions', 'smart-loginizer' ) ) );
+							echo '</div>';
+						}
 						$this->render_tab_sections( array( 'smart_loginizer_page_restriction', 'smart_loginizer_elementor_widget_restriction' ) );
 						submit_button();
 					} elseif ( 'help' === $active_tab ) {
@@ -979,12 +1063,16 @@ class Admin {
 		$value   = isset( $options[ $field_id ] ) ? $options[ $field_id ] : ( isset( $args['default'] ) ? $args['default'] : '' );
 		$type    = isset( $args['type'] ) ? $args['type'] : 'text';
 		$description = isset( $args['description'] ) ? $args['description'] : '';
+		$readonly = isset( $args['readonly'] ) && $args['readonly'];
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
+		$readonly_attr = $readonly ? ' readonly="readonly" disabled="disabled"' : '';
 
 		if ( 'textarea' === $type ) {
 			printf(
-				'<textarea id="%s" name="smart_loginizer_settings[%s]" class="large-text" rows="4">%s</textarea>',
+				'<textarea id="%s" name="smart_loginizer_settings[%s]" class="large-text" rows="4"%s>%s</textarea>',
 				esc_attr( $field_id ),
 				esc_attr( $field_id ),
+				$readonly_attr, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML attribute.
 				esc_textarea( $value )
 			);
 		} else {
@@ -998,17 +1086,20 @@ class Admin {
 			}
 			// $min_attr and $max_attr are already escaped HTML attribute strings, safe to output.
 			printf(
-				'<input type="%s" id="%s" name="smart_loginizer_settings[%s]" value="%s" class="regular-text"%s%s />',
+				'<input type="%s" id="%s" name="smart_loginizer_settings[%s]" value="%s" class="regular-text"%s%s%s />',
 				esc_attr( $type ),
 				esc_attr( $field_id ),
 				esc_attr( $field_id ),
 				esc_attr( $value ),
 				$min_attr, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped HTML attribute string.
-				$max_attr // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped HTML attribute string.
+				$max_attr, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped HTML attribute string.
+				$readonly_attr // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML attribute.
 			);
 		}
 
-		if ( ! empty( $description ) ) {
+		if ( $readonly && ! $is_pro ) {
+			printf( '<p class="description smart-loginizer-pro-notice-inline">%s</p>', wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( '' ) ) );
+		} elseif ( ! empty( $description ) ) {
 			printf( '<p class="description">%s</p>', wp_kses_post( $description ) );
 		}
 	}
@@ -1024,27 +1115,39 @@ class Admin {
 		$field_id = $args['label_for'];
 		$value   = isset( $options[ $field_id ] ) ? $options[ $field_id ] : 'no';
 		$checked = 'yes' === $value;
+		$readonly = isset( $args['readonly'] ) && $args['readonly'];
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
+		$readonly_attr = $readonly ? ' disabled="disabled"' : '';
 
 		printf(
-			'<label><input type="checkbox" id="%s" name="smart_loginizer_settings[%s]" value="yes" %s /> %s</label>',
+			'<label><input type="checkbox" id="%s" name="smart_loginizer_settings[%s]" value="yes" %s%s /> %s</label>',
 			esc_attr( $field_id ),
 			esc_attr( $field_id ),
 			checked( $checked, true, false ),
+			$readonly_attr, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML attribute.
 			esc_html__( 'Enable this feature', 'smart-loginizer' )
 		);
+
+		if ( $readonly && ! $is_pro ) {
+			printf( '<p class="description smart-loginizer-pro-notice-inline">%s</p>', wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( '' ) ) );
+		}
 	}
 
 	/**
 	 * Render location restriction type field.
 	 *
+	 * @param array $args Field arguments.
 	 * @return void
 	 */
-	public function render_location_restriction_type_field(): void {
+	public function render_location_restriction_type_field( array $args = array() ): void {
 		$options = get_option( 'smart_loginizer_settings', array() );
 		$value   = isset( $options['location_restriction_type'] ) ? $options['location_restriction_type'] : 'blocked';
+		$readonly = isset( $args['readonly'] ) && $args['readonly'];
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
+		$readonly_attr = $readonly ? ' disabled="disabled"' : '';
 
 		?>
-		<select id="location_restriction_type" name="smart_loginizer_settings[location_restriction_type]" class="regular-text">
+		<select id="location_restriction_type" name="smart_loginizer_settings[location_restriction_type]" class="regular-text"<?php echo $readonly_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML attribute. ?>>
 			<option value="blocked" <?php selected( $value, 'blocked' ); ?>>
 				<?php esc_html_e( 'Block Listed Countries', 'smart-loginizer' ); ?>
 			</option>
@@ -1053,6 +1156,9 @@ class Admin {
 			</option>
 		</select>
 		<?php
+		if ( $readonly && ! $is_pro ) {
+			printf( '<p class="description smart-loginizer-pro-notice-inline">%s</p>', wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( '' ) ) );
+		}
 	}
 
 	/**
@@ -1091,14 +1197,18 @@ class Admin {
 	/**
 	 * Render IP geolocation service field.
 	 *
+	 * @param array $args Field arguments.
 	 * @return void
 	 */
-	public function render_ip_geolocation_field(): void {
+	public function render_ip_geolocation_field( array $args = array() ): void {
 		$options = get_option( 'smart_loginizer_settings', array() );
 		$value   = isset( $options['ip_geolocation_service'] ) ? $options['ip_geolocation_service'] : 'ip-api-free';
+		$readonly = isset( $args['readonly'] ) && $args['readonly'];
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
+		$readonly_attr = $readonly ? ' disabled="disabled"' : '';
 
 		?>
-		<select id="ip_geolocation_service" name="smart_loginizer_settings[ip_geolocation_service]" class="regular-text">
+		<select id="ip_geolocation_service" name="smart_loginizer_settings[ip_geolocation_service]" class="regular-text"<?php echo $readonly_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML attribute. ?>>
 			<option value="ip-api-free" <?php selected( $value, 'ip-api-free' ); ?>>
 				<?php esc_html_e( 'ip-api.com (Free - No API Key Required)', 'smart-loginizer' ); ?>
 			</option>
@@ -1112,9 +1222,13 @@ class Admin {
 				<?php esc_html_e( 'ipgeolocation.io (Requires API Key)', 'smart-loginizer' ); ?>
 			</option>
 		</select>
-		<p class="description">
-			<?php esc_html_e( 'Default: ip-api.com (Free). No configuration needed. For premium services, select the service and enter your API key below.', 'smart-loginizer' ); ?>
-		</p>
+		<?php if ( $readonly && ! $is_pro ) : ?>
+			<p class="description smart-loginizer-pro-notice-inline"><?php echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( '' ) ); ?></p>
+		<?php else : ?>
+			<p class="description">
+				<?php esc_html_e( 'Default: ip-api.com (Free). No configuration needed. For premium services, select the service and enter your API key below.', 'smart-loginizer' ); ?>
+			</p>
+		<?php endif; ?>
 		<?php
 	}
 
@@ -1151,19 +1265,28 @@ class Admin {
 				// Default to 'yes' if not set (all widgets enabled by default).
 				$value = isset( $options[ $field_key ] ) ? $options[ $field_key ] : 'yes';
 				$checked = 'yes' === $value;
+				$is_pro_widget = in_array( $widget_key, array( 'auth_modal', 'auth_form' ), true );
 				?>
-				<div class="smart-loginizer-widget-card">
+				<div class="smart-loginizer-widget-card <?php echo $is_pro_widget ? 'smart-loginizer-pro-widget' : ''; ?>">
 					<div class="smart-loginizer-widget-card-header">
-						<h3 class="smart-loginizer-widget-title"><?php echo esc_html( $widget_label ); ?></h3>
+						<h3 class="smart-loginizer-widget-title">
+							<?php echo esc_html( $widget_label ); ?>
+							<?php if ( $is_pro_widget && ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active() ) : ?>
+								<span class="smart-loginizer-pro-badge"><?php esc_html_e( 'Pro', 'smart-loginizer' ); ?></span>
+							<?php endif; ?>
+						</h3>
 						<label class="smart-loginizer-toggle-switch">
 							<!-- Hidden input to ensure value is always sent, even when unchecked -->
 							<input type="hidden" name="smart_loginizer_settings[<?php echo esc_attr( $field_key ); ?>]" value="no" />
-							<input type="checkbox" name="smart_loginizer_settings[<?php echo esc_attr( $field_key ); ?>]" value="yes" <?php checked( $checked, true ); ?> />
+							<input type="checkbox" name="smart_loginizer_settings[<?php echo esc_attr( $field_key ); ?>]" value="yes" <?php checked( $checked, true ); ?> <?php echo ( $is_pro_widget && ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active() ) ? 'disabled' : ''; ?> />
 							<span class="smart-loginizer-toggle-slider"></span>
 						</label>
 					</div>
 					<p class="smart-loginizer-widget-description">
 						<?php esc_html_e( 'Enable this widget in Elementor', 'smart-loginizer' ); ?>
+						<?php if ( $is_pro_widget && ! \SmartLoginizer\Helpers\Pro_Helper::is_pro_active() ) : ?>
+							<br><small><?php echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( '' ) ); ?></small>
+						<?php endif; ?>
 					</p>
 				</div>
 			<?php endforeach; ?>
@@ -1174,11 +1297,15 @@ class Admin {
 	/**
 	 * Render WooCommerce logged-out action field.
 	 *
+	 * @param array $args Field arguments.
 	 * @return void
 	 */
-	public function render_woocommerce_logged_out_action_field(): void {
+	public function render_woocommerce_logged_out_action_field( array $args = array() ): void {
 		$options = get_option( 'smart_loginizer_settings', array() );
 		$action = isset( $options['woocommerce_logged_out_action'] ) ? $options['woocommerce_logged_out_action'] : 'default';
+		$readonly = isset( $args['readonly'] ) && $args['readonly'];
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
+		$readonly_attr = $readonly ? ' disabled="disabled"' : '';
 
 		// Check if WooCommerce is active.
 		$woocommerce_active = class_exists( 'WooCommerce' );
@@ -1191,23 +1318,27 @@ class Admin {
 		<?php else : ?>
 			<fieldset>
 				<label>
-					<input type="radio" name="smart_loginizer_settings[woocommerce_logged_out_action]" value="default" <?php checked( $action, 'default' ); ?> />
+					<input type="radio" name="smart_loginizer_settings[woocommerce_logged_out_action]" value="default" <?php checked( $action, 'default' ); ?><?php echo $readonly_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML attribute. ?> />
 					<?php esc_html_e( 'Default (Show WooCommerce login form)', 'smart-loginizer' ); ?>
 				</label>
 				<br>
 				<label>
-					<input type="radio" name="smart_loginizer_settings[woocommerce_logged_out_action]" value="template" <?php checked( $action, 'template' ); ?> />
+					<input type="radio" name="smart_loginizer_settings[woocommerce_logged_out_action]" value="template" <?php checked( $action, 'template' ); ?><?php echo $readonly_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML attribute. ?> />
 					<?php esc_html_e( 'Replace with Elementor template', 'smart-loginizer' ); ?>
 				</label>
 				<br>
 				<label>
-					<input type="radio" name="smart_loginizer_settings[woocommerce_logged_out_action]" value="redirect" <?php checked( $action, 'redirect' ); ?> />
+					<input type="radio" name="smart_loginizer_settings[woocommerce_logged_out_action]" value="redirect" <?php checked( $action, 'redirect' ); ?><?php echo $readonly_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML attribute. ?> />
 					<?php esc_html_e( 'Redirect to custom page', 'smart-loginizer' ); ?>
 				</label>
 			</fieldset>
-			<p class="description smart-loginizer-field-description">
-				<?php esc_html_e( 'Choose what happens when logged-out users visit the WooCommerce account page.', 'smart-loginizer' ); ?>
-			</p>
+			<?php if ( $readonly && ! $is_pro ) : ?>
+				<p class="description smart-loginizer-pro-notice-inline"><?php echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( '' ) ); ?></p>
+			<?php else : ?>
+				<p class="description smart-loginizer-field-description">
+					<?php esc_html_e( 'Choose what happens when logged-out users visit the WooCommerce account page.', 'smart-loginizer' ); ?>
+				</p>
+			<?php endif; ?>
 		<?php endif; ?>
 		<?php
 	}
@@ -1215,12 +1346,15 @@ class Admin {
 	/**
 	 * Render WooCommerce login replacement field.
 	 *
+	 * @param array $args Field arguments.
 	 * @return void
 	 */
-	public function render_woocommerce_login_replacement_field(): void {
+	public function render_woocommerce_login_replacement_field( array $args = array() ): void {
 		$options = get_option( 'smart_loginizer_settings', array() );
 		$action = isset( $options['woocommerce_logged_out_action'] ) ? $options['woocommerce_logged_out_action'] : 'default';
 		$template_id = isset( $options['woocommerce_login_replacement_template_id'] ) ? absint( $options['woocommerce_login_replacement_template_id'] ) : 0;
+		$readonly = isset( $args['readonly'] ) && $args['readonly'];
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
 
 		// Check if WooCommerce is active.
 		$woocommerce_active = class_exists( 'WooCommerce' );
@@ -1244,7 +1378,7 @@ class Admin {
 				<label for="woocommerce_login_replacement_template_id" class="smart-loginizer-field-label">
 					<?php esc_html_e( 'Elementor Template', 'smart-loginizer' ); ?>
 				</label>
-				<select id="woocommerce_login_replacement_template_id" name="smart_loginizer_settings[woocommerce_login_replacement_template_id]" class="regular-text" <?php echo ! $show_template_field ? 'disabled' : ''; ?>>
+				<select id="woocommerce_login_replacement_template_id" name="smart_loginizer_settings[woocommerce_login_replacement_template_id]" class="regular-text" <?php echo ( ! $show_template_field || $readonly ) ? 'disabled' : ''; ?>>
 					<option value="0"><?php esc_html_e( '-- Select a template --', 'smart-loginizer' ); ?></option>
 					<?php
 					// Get Elementor templates.
@@ -1267,9 +1401,13 @@ class Admin {
 					}
 					?>
 				</select>
-				<p class="description">
-					<?php esc_html_e( 'Select an Elementor template to replace the WooCommerce login form. Create templates in Templates > Saved Templates.', 'smart-loginizer' ); ?>
-				</p>
+				<?php if ( $readonly && ! $is_pro ) : ?>
+					<p class="description smart-loginizer-pro-notice-inline"><?php echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( '' ) ); ?></p>
+				<?php else : ?>
+					<p class="description">
+						<?php esc_html_e( 'Select an Elementor template to replace the WooCommerce login form. Create templates in Templates > Saved Templates.', 'smart-loginizer' ); ?>
+					</p>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
 		<?php
@@ -1278,12 +1416,15 @@ class Admin {
 	/**
 	 * Render WooCommerce redirect page field.
 	 *
+	 * @param array $args Field arguments.
 	 * @return void
 	 */
-	public function render_woocommerce_redirect_page_field(): void {
+	public function render_woocommerce_redirect_page_field( array $args = array() ): void {
 		$options = get_option( 'smart_loginizer_settings', array() );
 		$action = isset( $options['woocommerce_logged_out_action'] ) ? $options['woocommerce_logged_out_action'] : 'default';
 		$page_id = isset( $options['woocommerce_logged_out_redirect_page_id'] ) ? absint( $options['woocommerce_logged_out_redirect_page_id'] ) : 0;
+		$readonly = isset( $args['readonly'] ) && $args['readonly'];
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
 
 		// Check if WooCommerce is active.
 		$woocommerce_active = class_exists( 'WooCommerce' );
@@ -1294,7 +1435,7 @@ class Admin {
 				<?php esc_html_e( 'WooCommerce is not active.', 'smart-loginizer' ); ?>
 			</p>
 		<?php else : ?>
-			<select id="woocommerce_logged_out_redirect_page_id" name="smart_loginizer_settings[woocommerce_logged_out_redirect_page_id]" class="regular-text" <?php echo 'redirect' !== $action ? 'disabled' : ''; ?>>
+			<select id="woocommerce_logged_out_redirect_page_id" name="smart_loginizer_settings[woocommerce_logged_out_redirect_page_id]" class="regular-text" <?php echo ( 'redirect' !== $action || $readonly ) ? 'disabled' : ''; ?>>
 				<option value="0"><?php esc_html_e( '-- Select a page --', 'smart-loginizer' ); ?></option>
 				<?php
 				$pages = get_pages(
@@ -1313,9 +1454,13 @@ class Admin {
 				}
 				?>
 			</select>
-			<p class="description">
-				<?php esc_html_e( 'Select the page to redirect logged-out users to when they visit the WooCommerce account page.', 'smart-loginizer' ); ?>
-			</p>
+			<?php if ( $readonly && ! $is_pro ) : ?>
+				<p class="description smart-loginizer-pro-notice-inline"><?php echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( '' ) ); ?></p>
+			<?php else : ?>
+				<p class="description">
+					<?php esc_html_e( 'Select the page to redirect logged-out users to when they visit the WooCommerce account page.', 'smart-loginizer' ); ?>
+				</p>
+			<?php endif; ?>
 		<?php endif; ?>
 		<?php
 	}
@@ -1323,9 +1468,10 @@ class Admin {
 	/**
 	 * Render custom login page field.
 	 *
+	 * @param array $args Field arguments.
 	 * @return void
 	 */
-	public function render_custom_login_page_field(): void {
+	public function render_custom_login_page_field( array $args = array() ): void {
 		$options = get_option( 'smart_loginizer_settings', array() );
 		$enabled = isset( $options['enable_custom_login_page'] ) && 'yes' === $options['enable_custom_login_page'];
 		$page_id = isset( $options['custom_login_page_id'] ) ? absint( $options['custom_login_page_id'] ) : 0;
@@ -1400,11 +1546,15 @@ class Admin {
 	/**
 	 * Render page restriction login template field.
 	 *
+	 * @param array $args Field arguments.
 	 * @return void
 	 */
-	public function render_page_restriction_login_template_field(): void {
+	public function render_page_restriction_login_template_field( array $args = array() ): void {
 		$options = get_option( 'smart_loginizer_settings', array() );
 		$template_id = isset( $options['page_restriction_login_template_id'] ) ? absint( $options['page_restriction_login_template_id'] ) : 0;
+		$readonly = isset( $args['readonly'] ) && $args['readonly'];
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
+		$readonly_attr = $readonly ? ' disabled="disabled"' : '';
 
 		if ( ! class_exists( '\Elementor\Plugin' ) ) {
 			?>
@@ -1418,7 +1568,7 @@ class Admin {
 				<label for="page_restriction_login_template_id" class="smart-loginizer-field-label">
 					<?php esc_html_e( 'Elementor Template', 'smart-loginizer' ); ?>
 				</label>
-				<select id="page_restriction_login_template_id" name="smart_loginizer_settings[page_restriction_login_template_id]" class="regular-text">
+				<select id="page_restriction_login_template_id" name="smart_loginizer_settings[page_restriction_login_template_id]" class="regular-text"<?php echo $readonly_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML attribute. ?>>
 					<option value="0"><?php esc_html_e( '-- Select a template --', 'smart-loginizer' ); ?></option>
 					<?php
 					// Get Elementor templates.
@@ -1441,9 +1591,13 @@ class Admin {
 					}
 					?>
 				</select>
-				<p class="description">
-					<?php esc_html_e( 'Select an Elementor template to use as the login page when users are redirected from restricted pages. Create templates in Templates > Saved Templates.', 'smart-loginizer' ); ?>
-				</p>
+				<?php if ( $readonly && ! $is_pro ) : ?>
+					<p class="description smart-loginizer-pro-notice-inline"><?php echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( '' ) ); ?></p>
+				<?php else : ?>
+					<p class="description">
+						<?php esc_html_e( 'Select an Elementor template to use as the login page when users are redirected from restricted pages. Create templates in Templates > Saved Templates.', 'smart-loginizer' ); ?>
+					</p>
+				<?php endif; ?>
 			</div>
 			<?php
 		}
@@ -1452,11 +1606,15 @@ class Admin {
 	/**
 	 * Render elementor widget restriction login template field.
 	 *
+	 * @param array $args Field arguments.
 	 * @return void
 	 */
-	public function render_elementor_widget_restriction_login_template_field(): void {
+	public function render_elementor_widget_restriction_login_template_field( array $args = array() ): void {
 		$options = get_option( 'smart_loginizer_settings', array() );
 		$template_id = isset( $options['elementor_widget_restriction_login_template_id'] ) ? absint( $options['elementor_widget_restriction_login_template_id'] ) : 0;
+		$readonly = isset( $args['readonly'] ) && $args['readonly'];
+		$is_pro = \SmartLoginizer\Helpers\Pro_Helper::is_pro_active();
+		$readonly_attr = $readonly ? ' disabled="disabled"' : '';
 
 		if ( ! class_exists( '\Elementor\Plugin' ) ) {
 			?>
@@ -1470,7 +1628,7 @@ class Admin {
 				<label for="elementor_widget_restriction_login_template_id" class="smart-loginizer-field-label">
 					<?php esc_html_e( 'Elementor Template', 'smart-loginizer' ); ?>
 				</label>
-				<select id="elementor_widget_restriction_login_template_id" name="smart_loginizer_settings[elementor_widget_restriction_login_template_id]" class="regular-text">
+				<select id="elementor_widget_restriction_login_template_id" name="smart_loginizer_settings[elementor_widget_restriction_login_template_id]" class="regular-text"<?php echo $readonly_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML attribute. ?>>
 					<option value="0"><?php esc_html_e( '-- Select a template --', 'smart-loginizer' ); ?></option>
 					<?php
 					// Get Elementor templates.
@@ -1493,9 +1651,13 @@ class Admin {
 					}
 					?>
 				</select>
-				<p class="description">
-					<?php esc_html_e( 'Select an Elementor template to use as the login page when restricted widgets need to show a login form. Create templates in Templates > Saved Templates.', 'smart-loginizer' ); ?>
-				</p>
+				<?php if ( $readonly && ! $is_pro ) : ?>
+					<p class="description smart-loginizer-pro-notice-inline"><?php echo wp_kses_post( \SmartLoginizer\Helpers\Pro_Helper::get_pro_notice( '' ) ); ?></p>
+				<?php else : ?>
+					<p class="description">
+						<?php esc_html_e( 'Select an Elementor template to use as the login page when restricted widgets need to show a login form. Create templates in Templates > Saved Templates.', 'smart-loginizer' ); ?>
+					</p>
+				<?php endif; ?>
 			</div>
 			<?php
 		}

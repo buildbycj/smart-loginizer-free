@@ -64,16 +64,16 @@ class Core {
 	/**
 	 * Admin Page Restriction instance.
 	 *
-	 * @var Admin_Page_Restriction
+	 * @var Admin_Page_Restriction|null
 	 */
-	public Admin_Page_Restriction $admin_page_restriction;
+	public ?Admin_Page_Restriction $admin_page_restriction = null;
 
 	/**
 	 * Frontend Page Restriction instance.
 	 *
-	 * @var Frontend_Page_Restriction
+	 * @var Frontend_Page_Restriction|null
 	 */
-	public Frontend_Page_Restriction $frontend_page_restriction;
+	public ?Frontend_Page_Restriction $frontend_page_restriction = null;
 
 	/**
 	 * Elementor Widget Restriction instance.
@@ -97,13 +97,13 @@ class Core {
 		// Initialize admin.
 		$this->admin = new Admin();
 
-		// Initialize admin page restriction.
+		// Initialize admin page restriction (now always available).
 		$this->admin_page_restriction = new Admin_Page_Restriction();
 
 		// Initialize frontend.
 		$this->frontend = new Frontend();
 
-		// Initialize frontend page restriction.
+		// Initialize frontend page restriction (now always available).
 		$this->frontend_page_restriction = new Frontend_Page_Restriction();
 
 		// Initialize widgets manager.

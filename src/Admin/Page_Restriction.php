@@ -151,17 +151,46 @@ class Page_Restriction {
 						<label for="smart_loginizer_restriction_redirect">
 							<strong><?php esc_html_e( 'Redirect Page:', 'smart-loginizer' ); ?></strong>
 						</label>
-						<?php
-						wp_dropdown_pages(
-							array(
-								'name'             => 'smart_loginizer_restriction_redirect',
-								'id'               => 'smart_loginizer_restriction_redirect',
-								'selected'         => absint( $restriction_redirect ),
-								'show_option_none' => esc_html__( '-- Select a page --', 'smart-loginizer' ),
-								'class'            => 'widefat',
-							)
-						);
-						?>
+						<select name="smart_loginizer_restriction_redirect" id="smart_loginizer_restriction_redirect" class="widefat">
+							<option value="0"><?php esc_html_e( '-- Select a page or post --', 'smart-loginizer' ); ?></option>
+							<?php
+							// Get all pages and posts.
+							$pages_and_posts = get_posts(
+								array(
+									'post_type'      => array( 'page', 'post' ),
+									'posts_per_page' => -1,
+									'post_status'    => 'publish',
+									'orderby'        => 'post_type',
+									'order'          => 'ASC',
+								)
+							);
+
+							// Group by post type for better organization.
+							$grouped = array();
+							foreach ( $pages_and_posts as $item ) {
+								$post_type_obj = get_post_type_object( $item->post_type );
+								$type_label    = $post_type_obj ? $post_type_obj->labels->singular_name : ucfirst( $item->post_type );
+								if ( ! isset( $grouped[ $type_label ] ) ) {
+									$grouped[ $type_label ] = array();
+								}
+								$grouped[ $type_label ][] = $item;
+							}
+
+							// Output grouped options.
+							foreach ( $grouped as $type_label => $items ) {
+								printf( '<optgroup label="%s">', esc_attr( $type_label ) );
+								foreach ( $items as $item ) {
+									printf(
+										'<option value="%d" %s>%s</option>',
+										esc_attr( $item->ID ),
+										selected( $restriction_redirect, $item->ID, false ),
+										esc_html( $item->post_title )
+									);
+								}
+								echo '</optgroup>';
+							}
+							?>
+						</select>
 					</p>
 				</div>
 
