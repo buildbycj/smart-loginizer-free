@@ -18,29 +18,11 @@ A comprehensive WordPress plugin that provides Elementor widgets for user authen
 
 ## ✨ Features
 
-### 🎨 Elementor Widgets (9 Widgets)
+### 🎨 Elementor Widgets (7 Widgets)
 
-Smart Loginizer provides 9 powerful Elementor widgets for building custom authentication and account management interfaces:
+Smart Loginizer provides 7 powerful Elementor widgets for building custom authentication and account management interfaces:
 
-1. **My Account Nav Widget**
-   - Horizontal and vertical navigation layouts
-   - Customizable menu items with icons
-   - Endpoint and custom URL support
-   - Icon positioning (left/right)
-   - Spacing and alignment controls
-   - Divider options
-   - Sortable menu items
-   - Visibility controls per item
-
-2. **My Account Content Widget**
-   - Display WooCommerce endpoints
-   - Custom template support
-   - Content wrapper styling
-   - Padding, background, and border radius controls
-   - Typography customization
-   - Responsive design
-
-3. **Login Form Widget**
+1. **Login Form Widget**
    - Username/Email and password fields
    - AJAX form submissions
    - Custom redirect after login
@@ -50,7 +32,7 @@ Smart Loginizer provides 9 powerful Elementor widgets for building custom authen
    - Button style customization
    - Responsive settings
 
-4. **Registration Form Widget**
+2. **Registration Form Widget**
    - Username, email, password, and confirm password fields
    - Password strength meter (zxcvbn.js)
    - Auto-login after registration option
@@ -60,7 +42,7 @@ Smart Loginizer provides 9 powerful Elementor widgets for building custom authen
    - Customizable form styling
    - Responsive design
 
-5. **Lost Password Widget**
+3. **Lost Password Widget**
    - Email input field
    - Password reset functionality
    - Customizable success messages
@@ -68,27 +50,27 @@ Smart Loginizer provides 9 powerful Elementor widgets for building custom authen
    - reCAPTCHA support
    - Styling controls
 
-6. **Logout Button Widget**
+4. **Logout Button Widget**
    - Custom redirect after logout
    - Customizable button text
    - Icon support
    - Full styling controls
    - Responsive settings
 
-7. **Go Home Button Widget**
+5. **Go Home Button Widget**
    - Navigate to home or custom URL
    - Customizable button text
    - Optional icon
    - Full styling controls
 
-8. **Auth Modal Widget**
+6. **Auth Modal Widget**
    - Modal popup for authentication
    - Login and registration tabs
    - Customizable modal styling
    - Trigger button customization
    - Responsive modal design
 
-9. **Auth Form Widget (Inline)**
+7. **Auth Form Widget (Inline)**
    - Inline authentication form
    - Login and registration support
    - Customizable layout
