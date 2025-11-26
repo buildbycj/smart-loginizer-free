@@ -1,6 +1,7 @@
 # Composer
 /vendor/
 composer.lock
+/.cursor/
 
 # IDE
 .idea/
@@ -24,4 +25,5 @@ wp-config.php
 node_modules/
 package-lock.json
 
+details.md
 details.md
