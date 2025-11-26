@@ -27,3 +27,6 @@ package-lock.json
 
 details.md
 details.md
+
+# Editor workspace
+.cursor/

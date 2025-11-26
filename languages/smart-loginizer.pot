@@ -1,4 +1,4 @@
-# Copyright (C) 2025 Smart Loginizer
+# Copyright (C) 2025 Chiranjit Hazarika
 # This file is distributed under the same license as the Smart Loginizer plugin.
 msgid ""
 msgstr ""

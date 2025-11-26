@@ -1,6 +1,14 @@
+<p align="left">
+  <img src="assets/images/logo.svg" alt="Smart Loginizer Logo" width="120" />
+</p>
+
 # Smart Loginizer
 
 A comprehensive WordPress plugin that provides Elementor widgets for user authentication and account management with advanced security features, OAuth social login integration, and WooCommerce compatibility.
+
+<p align="center">
+  <img src="screenshots/banner.png" alt="Smart Loginizer Banner" />
+</p>
 
 ## 📋 Table of Contents
 
@@ -8,6 +16,7 @@ A comprehensive WordPress plugin that provides Elementor widgets for user authen
 - [Pro Version](#pro-version)
 - [Requirements](#requirements)
 - [Installation](#installation)
+- [Screenshots](#screenshots)
 - [Configuration](#configuration)
 - [Widgets](#widgets)
 - [OAuth Setup](#oauth-setup)
@@ -307,6 +316,25 @@ If you need advanced features like Elementor widget restriction, WooCommerce log
    - Security settings
    - WooCommerce integration
 3. Add widgets to your pages using Elementor
+
+## 📸 Screenshots
+
+### Plugin Settings Pages
+
+<p align="center">
+  <img src="screenshots/s1.png" alt="Smart Loginizer Settings - General Tab" width="800" />
+  <br><em>General Settings Tab</em>
+</p>
+
+<p align="center">
+  <img src="screenshots/s2.png" alt="Smart Loginizer Settings - Security Tab" width="800" />
+  <br><em>Security Settings Tab</em>
+</p>
+
+<p align="center">
+  <img src="screenshots/s3.png" alt="Smart Loginizer Settings - Social Login Tab" width="800" />
+  <br><em>Social Login Settings Tab</em>
+</p>
 
 ## ⚙️ Configuration
 
