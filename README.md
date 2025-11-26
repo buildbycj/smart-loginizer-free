@@ -1,6 +1,3 @@
-<p align="left">
-  <img src="assets/images/logo.svg" alt="Smart Loginizer Logo" width="80" />
-</p>
 <p align="center">
   <img src="screenshots/banner.png" alt="Smart Loginizer Banner" />
 </p>
