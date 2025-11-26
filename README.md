@@ -1,14 +1,13 @@
 <p align="left">
-  <img src="assets/images/logo.svg" alt="Smart Loginizer Logo" width="120" />
+  <img src="assets/images/logo.svg" alt="Smart Loginizer Logo" width="80" />
+</p>
+<p align="center">
+  <img src="screenshots/banner.png" alt="Smart Loginizer Banner" />
 </p>
 
 # Smart Loginizer
 
 A comprehensive WordPress plugin that provides Elementor widgets for user authentication and account management with advanced security features, OAuth social login integration, and WooCommerce compatibility.
-
-<p align="center">
-  <img src="screenshots/banner.png" alt="Smart Loginizer Banner" />
-</p>
 
 ## 📋 Table of Contents
 
