@@ -1,0 +1,69 @@
+---
+alwaysApply: true
+---
+
+
+Coding Guidelines (2025-Ready)
+PHP / WordPress
+
+Min PHP: 8.1
+
+Use scalar and return type hints wherever reasonable.
+
+Avoid deprecated functions; check the WP dev reference for replacements.
+
+Use wp_enqueue_script() / wp_enqueue_style() properly.
+
+Never access $_GET, $_POST, $_REQUEST, $_SERVER without sanitization.
+
+Security
+
+Escape any output to HTML using:
+
+esc_html(), esc_attr(), esc_url(), wp_kses(), etc.
+
+Sanitize inputs on save:
+
+sanitize_text_field(), sanitize_key(), absint(), floatval(), etc.
+
+Use nonces for any form/action:
+
+wp_nonce_field(), check_admin_referer()
+
+Always check capabilities:
+
+current_user_can('manage_options') for settings page.
+
+Performance
+
+Only run optimization logic if plugin is enabled.
+
+Avoid expensive DB queries on each page load.
+
+Use options and transients instead of custom tables unless needed.
+
+Keep admin scripts/styles small and only load on plugin pages.
+
+i18n
+
+Wrap all user-visible strings:
+
+__('Text', 'auto-web-vitals-optimizer')
+
+esc_html_e('Text', 'auto-web-vitals-optimizer')
+
+Generate .pot file in languages/.
+
+Code Style
+
+Follow PSR-12 as much as feasible with WordPress.
+
+4 spaces indentation, no tabs.
+
+Class names: StudlyCaps.
+
+Namespaces: AutoWebVitals\{Layer}.
+
+Keep file/class mapping consistent for the autoloader.
+
+Prefix everything (awvo_ or AutoWebVitals namespace) to avoid conflicts.

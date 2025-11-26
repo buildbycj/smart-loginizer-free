@@ -1,0 +1,46 @@
+# Copyright (C) 2025 Smart Loginizer
+# This file is distributed under the same license as the Smart Loginizer plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Smart Loginizer 1.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-loginizer\n"
+"POT-Creation-Date: 2025-01-01 00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: smart-loginizer.php:XX
+msgid "Smart Loginizer requires %1$s to be installed and active."
+msgstr ""
+
+#: src/Widgets/My_Account_Nav_Widget.php:XX
+msgid "My Account Nav"
+msgstr ""
+
+#: src/Widgets/My_Account_Content_Widget.php:XX
+msgid "My Account Content"
+msgstr ""
+
+#: src/Widgets/Login_Form_Widget.php:XX
+msgid "Login Form"
+msgstr ""
+
+#: src/Widgets/Registration_Form_Widget.php:XX
+msgid "Registration Form"
+msgstr ""
+
+#: src/Widgets/Lost_Password_Widget.php:XX
+msgid "Lost Password"
+msgstr ""
+
+#: src/Widgets/Logout_Button_Widget.php:XX
+msgid "Logout Button"
+msgstr ""
+
+#: src/Widgets/Go_Home_Button_Widget.php:XX
+msgid "Go Home Button"
+msgstr ""
+

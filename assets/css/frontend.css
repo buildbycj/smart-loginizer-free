@@ -1,0 +1,1364 @@
+/**
+ * Frontend Styles
+ *
+ * @package SmartLoginizer
+ */
+
+/* Navigation Widget */
+.smart-loginizer-nav {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.smart-loginizer-nav.orientation-horizontal {
+	flex-direction: row;
+}
+
+.smart-loginizer-nav.orientation-vertical {
+	flex-direction: column;
+}
+
+.smart-loginizer-nav.align-left {
+	justify-content: flex-start;
+}
+
+.smart-loginizer-nav.align-center {
+	justify-content: center;
+}
+
+.smart-loginizer-nav.align-right {
+	justify-content: flex-end;
+}
+
+.smart-loginizer-nav-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	text-decoration: none;
+	color: inherit;
+	padding: 10px;
+	margin: calc(var(--spacing, 10px) / 2);
+	transition: opacity 0.3s ease;
+}
+
+.smart-loginizer-nav-item:hover {
+	opacity: 0.8;
+}
+
+.smart-loginizer-nav-icon {
+	display: inline-flex;
+	align-items: center;
+}
+
+.smart-loginizer-nav-divider {
+	width: 1px;
+	background-color: #ddd;
+	margin: 0 calc(var(--spacing, 10px) / 2);
+}
+
+/* Account Content Widget */
+.smart-loginizer-account-content {
+	padding: 20px;
+}
+
+/* Form Styles */
+.smart-loginizer-login-form,
+.smart-loginizer-registration-form,
+.smart-loginizer-lost-password-form {
+	max-width: 400px;
+	margin: 0 auto;
+}
+
+.smart-loginizer-form-field {
+	margin-bottom: 20px;
+}
+
+/* Ensure spacing between password and confirm password fields */
+.smart-loginizer-form-field:has(input[type="password"][name="password"]) {
+	margin-bottom: 20px !important;
+}
+
+/* Fix input wrapper when it contains password strength meter */
+.smart-loginizer-input-wrapper:has(.smart-loginizer-password-strength-meter) {
+	flex-wrap: wrap;
+	align-items: flex-start;
+}
+
+.smart-loginizer-input-wrapper:has(.smart-loginizer-password-strength-meter) > input {
+	width: 100%;
+	flex-basis: 100%;
+}
+
+.smart-loginizer-form-field label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: 500;
+}
+
+/* Remember me checkbox - center text vertically with checkbox */
+.smart-loginizer-form-field label:has(input[type="checkbox"][name="remember"]) {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 0;
+	cursor: pointer;
+}
+
+.smart-loginizer-form-field label:has(input[type="checkbox"][name="remember"]) input[type="checkbox"] {
+	margin: 0;
+	flex-shrink: 0;
+}
+
+.smart-loginizer-form-field input[type="text"],
+.smart-loginizer-form-field input[type="email"],
+.smart-loginizer-form-field input[type="password"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 14px;
+}
+
+/* Form Field Icons */
+.smart-loginizer-input-wrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.smart-loginizer-input-wrapper .smart-loginizer-form-field input {
+	flex: 1;
+}
+
+/* Default: no padding when icons are not present */
+.smart-loginizer-input-wrapper input {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+/* Apply padding only when icon is present (left icon - icon comes before input) */
+.smart-loginizer-input-wrapper.smart-loginizer-icon-left .smart-loginizer-input-icon + input {
+	padding-left: 40px;
+}
+
+/* Apply padding only when icon is present (right icon - using :has() for modern browsers) */
+.smart-loginizer-input-wrapper.smart-loginizer-icon-right:has(.smart-loginizer-input-icon) input {
+	padding-right: 40px;
+}
+
+.smart-loginizer-input-icon {
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #666;
+	z-index: 1;
+	pointer-events: none;
+	transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.smart-loginizer-input-wrapper.smart-loginizer-icon-left .smart-loginizer-input-icon {
+	left: 12px;
+}
+
+.smart-loginizer-input-wrapper.smart-loginizer-icon-right .smart-loginizer-input-icon {
+	right: 12px;
+}
+
+.smart-loginizer-input-icon svg,
+.smart-loginizer-input-icon i {
+	width: 18px;
+	height: 18px;
+	font-size: 18px;
+}
+
+.smart-loginizer-submit-btn {
+	width: 100%;
+	padding: 12px;
+	background-color: #0073aa;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+	transition: background-color 0.3s ease;
+}
+
+.smart-loginizer-submit-btn:hover {
+	background-color: #005a87;
+}
+
+.smart-loginizer-form-message {
+	margin-top: 15px;
+	padding: 10px;
+	border-radius: 4px;
+	display: none;
+}
+
+.smart-loginizer-form-message.success {
+	background-color: #d4edda;
+	color: #155724;
+	border: 1px solid #c3e6cb;
+	display: block;
+}
+
+.smart-loginizer-form-message.error {
+	background-color: #f8d7da;
+	color: #721c24;
+	border: 1px solid #f5c6cb;
+	display: block;
+}
+
+/* Password Strength Meter */
+.smart-loginizer-password-strength-meter {
+	margin-top: 5px;
+	margin-bottom: 0;
+	width: 100%;
+	flex-basis: 100%;
+	order: 10;
+	height: 4px;
+	background-color: #eee;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.smart-loginizer-password-strength-meter::after {
+	content: '';
+	display: block;
+	height: 100%;
+	width: 0%;
+	transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.smart-loginizer-password-strength-meter.weak::after {
+	width: 25%;
+	background-color: #dc3545;
+}
+
+.smart-loginizer-password-strength-meter.fair::after {
+	width: 50%;
+	background-color: #ffc107;
+}
+
+.smart-loginizer-password-strength-meter.good::after {
+	width: 75%;
+	background-color: #28a745;
+}
+
+.smart-loginizer-password-strength-meter.strong::after {
+	width: 100%;
+	background-color: #28a745;
+}
+
+/* Button Widgets */
+.smart-loginizer-logout-button,
+.smart-loginizer-go-home-button {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 20px;
+	background-color: #0073aa;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 4px;
+	transition: background-color 0.3s ease;
+}
+
+.smart-loginizer-logout-button:hover,
+.smart-loginizer-go-home-button:hover {
+	background-color: #005a87;
+	color: #fff;
+}
+
+.smart-loginizer-button-icon {
+	display: inline-flex;
+	align-items: center;
+}
+
+/* Modal Widget */
+.smart-loginizer-modal-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 999999;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	transition: opacity 0.3s ease, display 0s 0.3s;
+}
+
+.smart-loginizer-modal-overlay.active {
+	display: flex;
+	opacity: 1;
+	transition: opacity 0.3s ease;
+}
+
+.smart-loginizer-modal-content {
+	position: relative;
+	background: #fff;
+	border-radius: 8px;
+	max-height: 90vh;
+	overflow-y: auto;
+	overflow-x: hidden;
+	min-height: 200px;
+	transition: transform 0.3s ease, opacity 0.3s ease;
+	transform: scale(0.9);
+	opacity: 1;
+}
+
+.smart-loginizer-modal-overlay.active .smart-loginizer-modal-content {
+	transform: scale(1);
+}
+
+/* Off-Canvas Styles */
+.smart-loginizer-modal-off-canvas .smart-loginizer-modal-content {
+	position: fixed;
+	max-width: 400px;
+	width: 90%;
+	max-width: 90vw;
+	height: 100%;
+	max-height: 100vh;
+	margin: 0;
+	transform: none;
+	border-radius: 0;
+}
+
+/* Off-Canvas Positions */
+.smart-loginizer-off-canvas-left .smart-loginizer-modal-content {
+	left: 0;
+	top: 0;
+	transform: translateX(-100%);
+}
+
+.smart-loginizer-off-canvas-left.active .smart-loginizer-modal-content {
+	transform: translateX(0);
+}
+
+.smart-loginizer-off-canvas-right .smart-loginizer-modal-content {
+	right: 0;
+	top: 0;
+	transform: translateX(100%);
+}
+
+.smart-loginizer-off-canvas-right.active .smart-loginizer-modal-content {
+	transform: translateX(0);
+}
+
+.smart-loginizer-off-canvas-top .smart-loginizer-modal-content {
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	max-height: 50vh;
+	transform: translateY(-100%);
+}
+
+.smart-loginizer-off-canvas-top.active .smart-loginizer-modal-content {
+	transform: translateY(0);
+}
+
+.smart-loginizer-off-canvas-bottom .smart-loginizer-modal-content {
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+	max-height: 50vh;
+	transform: translateY(100%);
+}
+
+.smart-loginizer-off-canvas-bottom.active .smart-loginizer-modal-content {
+	transform: translateY(0);
+}
+
+/* Off-Canvas Overlay Alignment */
+.smart-loginizer-modal-off-canvas {
+	justify-content: flex-start;
+	align-items: flex-start;
+}
+
+.smart-loginizer-off-canvas-right {
+	justify-content: flex-end;
+}
+
+.smart-loginizer-off-canvas-top {
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.smart-loginizer-off-canvas-bottom {
+	align-items: flex-end;
+	justify-content: center;
+}
+
+/* Animation Effects - Fade */
+.smart-loginizer-modal-overlay.effect-fade {
+	opacity: 0;
+}
+
+.smart-loginizer-modal-overlay.effect-fade.active {
+	opacity: 1;
+}
+
+.smart-loginizer-modal-overlay.effect-fade.closing {
+	opacity: 0;
+}
+
+/* Animation Effects - Slide */
+.smart-loginizer-modal-content.effect-slide {
+	transform: translateY(-50px);
+	opacity: 0;
+}
+
+.smart-loginizer-modal-overlay.active .smart-loginizer-modal-content.effect-slide {
+	transform: translateY(0);
+	opacity: 1;
+}
+
+.smart-loginizer-modal-content.effect-slide.closing {
+	transform: translateY(50px);
+	opacity: 0;
+}
+
+/* Off-Canvas Slide Effects */
+.smart-loginizer-off-canvas-left .smart-loginizer-modal-content.effect-slide {
+	transform: translateX(-100%);
+}
+
+.smart-loginizer-off-canvas-right .smart-loginizer-modal-content.effect-slide {
+	transform: translateX(100%);
+}
+
+.smart-loginizer-off-canvas-top .smart-loginizer-modal-content.effect-slide {
+	transform: translateY(-100%);
+}
+
+.smart-loginizer-off-canvas-bottom .smart-loginizer-modal-content.effect-slide {
+	transform: translateY(100%);
+}
+
+.smart-loginizer-off-canvas-left.active .smart-loginizer-modal-content.effect-slide,
+.smart-loginizer-off-canvas-right.active .smart-loginizer-modal-content.effect-slide,
+.smart-loginizer-off-canvas-top.active .smart-loginizer-modal-content.effect-slide,
+.smart-loginizer-off-canvas-bottom.active .smart-loginizer-modal-content.effect-slide {
+	transform: translate(0, 0);
+}
+
+/* Animation Effects - Zoom */
+.smart-loginizer-modal-content.effect-zoom {
+	transform: scale(0.3);
+	opacity: 0;
+}
+
+.smart-loginizer-modal-overlay.active .smart-loginizer-modal-content.effect-zoom {
+	transform: scale(1);
+	opacity: 1;
+}
+
+.smart-loginizer-modal-content.effect-zoom.closing {
+	transform: scale(0.3);
+	opacity: 0;
+}
+
+/* Animation Effects - Flip */
+.smart-loginizer-modal-content.effect-flip {
+	transform: perspective(1000px) rotateY(-90deg);
+	opacity: 0;
+}
+
+.smart-loginizer-modal-overlay.active .smart-loginizer-modal-content.effect-flip {
+	transform: perspective(1000px) rotateY(0deg);
+	opacity: 1;
+}
+
+.smart-loginizer-modal-content.effect-flip.closing {
+	transform: perspective(1000px) rotateY(90deg);
+	opacity: 0;
+}
+
+/* Animation Effects - Rotate */
+.smart-loginizer-modal-content.effect-rotate {
+	transform: rotate(-180deg) scale(0.5);
+	opacity: 0;
+}
+
+.smart-loginizer-modal-overlay.active .smart-loginizer-modal-content.effect-rotate {
+	transform: rotate(0deg) scale(1);
+	opacity: 1;
+}
+
+.smart-loginizer-modal-content.effect-rotate.closing {
+	transform: rotate(180deg) scale(0.5);
+	opacity: 0;
+}
+
+/* Animation Effects - Bounce */
+.smart-loginizer-modal-content.effect-bounce {
+	transform: translateY(-100px) scale(0.5);
+	opacity: 0;
+}
+
+.smart-loginizer-modal-overlay.active .smart-loginizer-modal-content.effect-bounce {
+	transform: translateY(0) scale(1);
+	opacity: 1;
+	animation: bounceIn 0.6s ease;
+}
+
+.smart-loginizer-modal-content.effect-bounce.closing {
+	transform: translateY(100px) scale(0.5);
+	opacity: 0;
+	animation: bounceOut 0.4s ease;
+}
+
+@keyframes bounceIn {
+	0% {
+		transform: translateY(-100px) scale(0.5);
+		opacity: 0;
+	}
+	50% {
+		transform: translateY(20px) scale(1.1);
+		opacity: 1;
+	}
+	70% {
+		transform: translateY(-10px) scale(0.95);
+	}
+	100% {
+		transform: translateY(0) scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes bounceOut {
+	0% {
+		transform: translateY(0) scale(1);
+		opacity: 1;
+	}
+	50% {
+		transform: translateY(-20px) scale(1.1);
+		opacity: 0.8;
+	}
+	100% {
+		transform: translateY(100px) scale(0.5);
+		opacity: 0;
+	}
+}
+
+/* Animation Effects - Elastic */
+.smart-loginizer-modal-content.effect-elastic {
+	transform: scale(0) rotate(-180deg);
+	opacity: 0;
+}
+
+.smart-loginizer-modal-overlay.active .smart-loginizer-modal-content.effect-elastic {
+	transform: scale(1) rotate(0deg);
+	opacity: 1;
+	animation: elasticIn 0.8s ease;
+}
+
+.smart-loginizer-modal-content.effect-elastic.closing {
+	transform: scale(0) rotate(180deg);
+	opacity: 0;
+	animation: elasticOut 0.5s ease;
+}
+
+@keyframes elasticIn {
+	0% {
+		transform: scale(0) rotate(-180deg);
+		opacity: 0;
+	}
+	50% {
+		transform: scale(1.2) rotate(10deg);
+		opacity: 1;
+	}
+	70% {
+		transform: scale(0.9) rotate(-5deg);
+	}
+	100% {
+		transform: scale(1) rotate(0deg);
+		opacity: 1;
+	}
+}
+
+@keyframes elasticOut {
+	0% {
+		transform: scale(1) rotate(0deg);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1.1) rotate(5deg);
+		opacity: 0.8;
+	}
+	100% {
+		transform: scale(0) rotate(180deg);
+		opacity: 0;
+	}
+}
+
+/* Animation Effects - Back */
+.smart-loginizer-modal-content.effect-back {
+	transform: translateZ(-400px) scale(0.8);
+	opacity: 0;
+}
+
+.smart-loginizer-modal-overlay.active .smart-loginizer-modal-content.effect-back {
+	transform: translateZ(0) scale(1);
+	opacity: 1;
+	animation: backIn 0.6s ease;
+}
+
+.smart-loginizer-modal-content.effect-back.closing {
+	transform: translateZ(-400px) scale(0.8);
+	opacity: 0;
+	animation: backOut 0.4s ease;
+}
+
+@keyframes backIn {
+	0% {
+		transform: translateZ(-400px) scale(0.8);
+		opacity: 0;
+	}
+	60% {
+		transform: translateZ(50px) scale(1.05);
+		opacity: 1;
+	}
+	100% {
+		transform: translateZ(0) scale(1);
+		opacity: 1;
+	}
+}
+
+@keyframes backOut {
+	0% {
+		transform: translateZ(0) scale(1);
+		opacity: 1;
+	}
+	40% {
+		transform: translateZ(50px) scale(1.05);
+		opacity: 0.8;
+	}
+	100% {
+		transform: translateZ(-400px) scale(0.8);
+		opacity: 0;
+	}
+}
+
+/* Ensure all effects have proper transitions */
+.smart-loginizer-modal-content.effect-fade,
+.smart-loginizer-modal-content.effect-slide,
+.smart-loginizer-modal-content.effect-zoom,
+.smart-loginizer-modal-content.effect-flip,
+.smart-loginizer-modal-content.effect-rotate {
+	transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Fix for off-canvas with effects */
+.smart-loginizer-off-canvas-left .smart-loginizer-modal-content.effect-zoom,
+.smart-loginizer-off-canvas-right .smart-loginizer-modal-content.effect-zoom,
+.smart-loginizer-off-canvas-top .smart-loginizer-modal-content.effect-zoom,
+.smart-loginizer-off-canvas-bottom .smart-loginizer-modal-content.effect-zoom {
+	transform: scale(0.3);
+}
+
+.smart-loginizer-off-canvas-left.active .smart-loginizer-modal-content.effect-zoom,
+.smart-loginizer-off-canvas-right.active .smart-loginizer-modal-content.effect-zoom,
+.smart-loginizer-off-canvas-top.active .smart-loginizer-modal-content.effect-zoom,
+.smart-loginizer-off-canvas-bottom.active .smart-loginizer-modal-content.effect-zoom {
+	transform: scale(1) translate(0, 0);
+}
+
+.smart-loginizer-modal-close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: none;
+	border: none;
+	font-size: 28px;
+	cursor: pointer;
+	line-height: 1;
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #333;
+	z-index: 10;
+	transition: color 0.3s ease;
+}
+
+.smart-loginizer-modal-close:hover {
+	color: #000;
+}
+
+.smart-loginizer-form-link {
+	color: #0073aa;
+	text-decoration: none;
+	cursor: pointer;
+	transition: color 0.3s ease;
+	display: inline-block;
+}
+
+.smart-loginizer-form-link:hover {
+	color: #005a87;
+	text-decoration: underline;
+}
+
+/* Logout Trigger (for logged-in users in Auth Modal) */
+.smart-loginizer-logout-trigger {
+	text-decoration: none;
+	cursor: pointer;
+	display: inline-block;
+	transition: all 0.3s ease;
+}
+
+.smart-loginizer-logout-trigger:hover {
+	text-decoration: none;
+}
+
+/* Inline Auth Form Widget */
+.smart-loginizer-auth-form-wrapper {
+	width: 100%;
+}
+
+.smart-loginizer-auth-form-container {
+	position: relative;
+	margin: 0 auto;
+}
+
+.smart-loginizer-auth-form-panel {
+	display: none;
+}
+
+.smart-loginizer-auth-form-panel.active {
+	display: block;
+	animation: fadeIn 0.3s ease;
+}
+
+/* Logged In Message */
+.smart-loginizer-logged-in-message {
+	padding: 15px;
+	background-color: #f0f0f0;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin: 10px 0;
+	text-align: center;
+}
+
+/* Form Header (Logo, Headline, Description) */
+.smart-loginizer-form-header-logo {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.smart-loginizer-form-header-logo img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+}
+
+/* Off Canvas Logo Alignment Override */
+.smart-loginizer-modal-off-canvas .smart-loginizer-form-header-logo img {
+	display: inline-block;
+	margin: 0 !important;
+}
+
+/* Auth Form (Inline) Logo Alignment Override */
+.smart-loginizer-auth-form-wrapper .smart-loginizer-form-header-logo img,
+.smart-loginizer-auth-form-container .smart-loginizer-form-header-logo img {
+	display: inline-block;
+	margin: 0 !important;
+}
+
+.smart-loginizer-form-header {
+	margin-bottom: 25px;
+	text-align: center;
+}
+
+.smart-loginizer-form-headline {
+	margin: 0 0 10px 0;
+	font-size: 24px;
+	font-weight: 600;
+	color: #333;
+	line-height: 1.4;
+}
+
+.smart-loginizer-form-description {
+	margin: 0;
+	font-size: 14px;
+	color: #666;
+	line-height: 1.6;
+}
+
+.smart-loginizer-modal-body {
+	position: relative;
+}
+
+.smart-loginizer-modal-panel {
+	display: none;
+}
+
+.smart-loginizer-modal-panel.active {
+	display: block;
+	animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.smart-loginizer-modal-trigger {
+	cursor: pointer;
+	text-decoration: none;
+	border: none;
+	display: inline-block;
+}
+
+/* Form Style - Default (Desktop) */
+.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field {
+	display: block;
+}
+
+.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field label,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="text"],
+.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="email"],
+.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="password"],
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="text"],
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="email"],
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="password"] {
+	width: 100%;
+}
+
+/* Form Style - Inline (Desktop) */
+.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field {
+	display: flex !important;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field label,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field label {
+	display: inline-block !important;
+	margin-bottom: 0 !important;
+	min-width: 120px;
+	flex-shrink: 0;
+	font-weight: 500;
+}
+
+.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="text"],
+.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="email"],
+.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="password"],
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="text"],
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="email"],
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="password"] {
+	flex: 1;
+	min-width: 200px;
+	width: auto !important;
+}
+
+.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="checkbox"],
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="checkbox"] {
+	width: auto !important;
+	min-width: auto;
+	flex: none;
+}
+
+.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field .smart-loginizer-submit-btn,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field .smart-loginizer-submit-btn {
+	width: auto !important;
+	min-width: 150px;
+	flex: 1;
+}
+
+/* Exclude social login from inline form style */
+.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-social-login,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-social-login {
+	display: block !important;
+}
+
+.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-social-login .smart-loginizer-form-field,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-social-login .smart-loginizer-form-field {
+	display: block !important;
+}
+
+/* Form Style - Two Rows (Desktop) */
+.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-login-form,
+.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-registration-form,
+.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-lost-password-form,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-login-form,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-registration-form,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-lost-password-form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+	align-items: start;
+}
+
+.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field {
+	margin-bottom: 0;
+}
+
+/* Fields that should span full width in two-rows layout */
+.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(input[type="checkbox"]),
+.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-submit-btn),
+.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-link),
+.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-link-wrapper),
+.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-message),
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(input[type="checkbox"]),
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-submit-btn),
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-link),
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-link-wrapper),
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-message) {
+	grid-column: 1 / -1;
+}
+
+/* Exclude social login from two-rows grid layout */
+.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-social-login,
+.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-social-login {
+	grid-column: 1 / -1;
+	display: block !important;
+}
+
+/* Form Style - Tablet Responsive */
+@media (max-width: 1024px) {
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field {
+		display: flex !important;
+		align-items: center;
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field label,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field label {
+		display: inline-block !important;
+		margin-bottom: 0 !important;
+		min-width: 120px;
+		flex-shrink: 0;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="text"],
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="email"],
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="password"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="text"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="email"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="password"] {
+		flex: 1;
+		min-width: 200px;
+		width: auto !important;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="checkbox"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="checkbox"] {
+		width: auto !important;
+		min-width: auto;
+		flex: none;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field .smart-loginizer-submit-btn,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field .smart-loginizer-submit-btn {
+		width: auto !important;
+		min-width: 150px;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-login-form,
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-registration-form,
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-lost-password-form,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-login-form,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-registration-form,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-lost-password-form {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 20px;
+		align-items: start;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field {
+		margin-bottom: 0;
+	}
+
+	/* Fields that should span full width in two-rows layout on tablet */
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(input[type="checkbox"]),
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-submit-btn),
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-link),
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-link-wrapper),
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-message),
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(input[type="checkbox"]),
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-submit-btn),
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-link),
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-link-wrapper),
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field:has(.smart-loginizer-form-message) {
+		grid-column: 1 / -1;
+	}
+
+	/* Exclude social login from two-rows grid layout on tablet */
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-social-login,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-social-login {
+		grid-column: 1 / -1;
+		display: block !important;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field {
+		display: block;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field label,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field label {
+		display: block;
+		margin-bottom: 5px;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="text"],
+	.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="email"],
+	.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="password"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="text"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="email"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="password"] {
+		width: 100%;
+	}
+}
+
+/* Form Style - Mobile Responsive */
+@media (max-width: 768px) {
+	.smart-loginizer-nav.orientation-horizontal {
+		flex-direction: column;
+	}
+
+	.smart-loginizer-modal-content {
+		width: 95% !important;
+		max-width: 95% !important;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field {
+		display: flex !important;
+		align-items: center;
+		gap: 10px;
+		flex-wrap: wrap;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field label,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field label {
+		display: inline-block !important;
+		margin-bottom: 0 !important;
+		min-width: 100px;
+		flex-shrink: 0;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="text"],
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="email"],
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="password"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="text"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="email"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="password"] {
+		flex: 1;
+		min-width: 150px;
+		width: auto !important;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="checkbox"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field input[type="checkbox"] {
+		width: auto !important;
+		min-width: auto;
+		flex: none;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-form-field .smart-loginizer-submit-btn,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-form-field .smart-loginizer-submit-btn {
+		width: 100% !important;
+		min-width: auto;
+		flex: 1 1 100%;
+	}
+
+	/* Exclude social login from inline form style on mobile */
+	.smart-loginizer-modal-body.smart-loginizer-form-style-inline .smart-loginizer-social-login,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-inline .smart-loginizer-social-login {
+		display: block !important;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-login-form,
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-registration-form,
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-lost-password-form,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-login-form,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-registration-form,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-lost-password-form {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 15px;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-form-field,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-form-field {
+		margin-bottom: 0;
+	}
+
+	/* Exclude social login from two-rows grid layout on mobile */
+	.smart-loginizer-modal-body.smart-loginizer-form-style-two_rows .smart-loginizer-social-login,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-two_rows .smart-loginizer-social-login {
+		grid-column: 1 / -1;
+		display: block !important;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field {
+		display: block;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field label,
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field label {
+		display: block;
+		margin-bottom: 5px;
+	}
+
+	.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="text"],
+	.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="email"],
+	.smart-loginizer-modal-body.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="password"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="text"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="email"],
+	.smart-loginizer-form-wrapper.smart-loginizer-form-style-default .smart-loginizer-form-field input[type="password"] {
+		width: 100%;
+	}
+}
+
+
+/* Social Login Styles */
+.smart-loginizer-social-login {
+	margin-top: 24px;
+	margin-bottom: 24px;
+	padding-top: 24px;
+	border-top: 1px solid #e5e5e5;
+	clear: both;
+	display: block;
+	width: 100%;
+}
+
+.smart-loginizer-social-login-divider {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	margin: 20px 0;
+}
+
+.smart-loginizer-social-login-divider::before,
+.smart-loginizer-social-login-divider::after {
+	content: '';
+	flex: 1;
+	border-bottom: 1px solid #ddd;
+}
+
+.smart-loginizer-social-login-text {
+	padding: 0 15px;
+	color: #666;
+	font-size: 14px;
+}
+
+.smart-loginizer-social-login-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.smart-loginizer-social-btn {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	width: 100%;
+	padding: 12px 20px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background-color: #fff;
+	color: #333;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+.smart-loginizer-social-btn .smart-loginizer-social-text {
+	flex: 1;
+	text-align: center;
+}
+
+.smart-loginizer-social-btn .smart-loginizer-icon-left {
+	order: -1;
+	flex-shrink: 0;
+}
+
+.smart-loginizer-social-btn .smart-loginizer-icon-right {
+	order: 1;
+	flex-shrink: 0;
+}
+
+.smart-loginizer-social-btn .smart-loginizer-social-icon-spacer {
+	flex-shrink: 0;
+	/* Width will be set by JavaScript to match icon */
+}
+
+.smart-loginizer-social-btn:hover {
+	background-color: #f5f5f5;
+	border-color: #bbb;
+}
+
+.smart-loginizer-social-btn:active {
+	transform: scale(0.98);
+}
+
+.smart-loginizer-social-btn svg {
+	flex-shrink: 0;
+}
+
+.smart-loginizer-google-btn {
+	border-color: #dadce0;
+}
+
+.smart-loginizer-google-btn:hover {
+	background-color: #f8f9fa;
+	border-color: #dadce0;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* X (Twitter) Button Styles */
+.smart-loginizer-x-btn {
+	border-color: #000;
+	background-color: #000;
+	color: #fff;
+}
+
+.smart-loginizer-x-btn:hover {
+	background-color: #333;
+	border-color: #333;
+	color: #fff;
+}
+
+.smart-loginizer-x-btn svg {
+	fill: #fff;
+}
+
+/* LinkedIn Button Styles */
+.smart-loginizer-linkedin-btn {
+	border-color: #0a66c2;
+	background-color: #0a66c2;
+	color: #fff;
+}
+
+.smart-loginizer-linkedin-btn:hover {
+	background-color: #004182;
+	border-color: #004182;
+	color: #fff;
+}
+
+.smart-loginizer-linkedin-btn svg {
+	fill: #fff;
+}
+
+/* Facebook Button Styles */
+.smart-loginizer-facebook-btn {
+	border-color: #1877f2;
+	background-color: #1877f2;
+	color: #fff;
+}
+
+.smart-loginizer-facebook-btn:hover {
+	background-color: #166fe5;
+	border-color: #166fe5;
+	color: #fff;
+}
+
+.smart-loginizer-facebook-btn svg {
+	fill: #fff;
+}
+
+/* Password Toggle Button */
+.smart-loginizer-input-wrapper {
+	position: relative;
+}
+
+.smart-loginizer-password-toggle {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: none;
+	border: none;
+	padding: 4px 8px;
+	cursor: pointer;
+	color: #666;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 10;
+	transition: color 0.3s ease;
+}
+
+.smart-loginizer-password-toggle:hover {
+	color: #333;
+}
+
+.smart-loginizer-password-toggle:focus {
+	outline: 2px solid #0073aa;
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+.smart-loginizer-password-toggle .smart-loginizer-eye-icon,
+.smart-loginizer-password-toggle .smart-loginizer-eye-slash-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.smart-loginizer-password-toggle .smart-loginizer-eye-icon i,
+.smart-loginizer-password-toggle .smart-loginizer-eye-slash-icon i,
+.smart-loginizer-password-toggle .smart-loginizer-eye-icon svg,
+.smart-loginizer-password-toggle .smart-loginizer-eye-slash-icon svg {
+	width: 1em;
+	height: 1em;
+}
+
+/* Adjust input padding when toggle is present */
+.smart-loginizer-input-wrapper:has(.smart-loginizer-password-toggle) input[type="password"],
+.smart-loginizer-input-wrapper:has(.smart-loginizer-password-toggle) input[type="text"][name="password"],
+.smart-loginizer-input-wrapper:has(.smart-loginizer-password-toggle) input[type="text"][name="confirm_password"] {
+	padding-right: 45px;
+}
+
+/* When icon is on right, adjust toggle position */
+.smart-loginizer-input-wrapper.smart-loginizer-icon-right:has(.smart-loginizer-password-toggle) input[type="password"],
+.smart-loginizer-input-wrapper.smart-loginizer-icon-right:has(.smart-loginizer-password-toggle) input[type="text"][name="password"],
+.smart-loginizer-input-wrapper.smart-loginizer-icon-right:has(.smart-loginizer-password-toggle) input[type="text"][name="confirm_password"] {
+	padding-right: 45px;
+	padding-left: 45px;
+}
+
+.smart-loginizer-input-wrapper.smart-loginizer-icon-right:has(.smart-loginizer-password-toggle) .smart-loginizer-password-toggle {
+	right: 12px;
+}
